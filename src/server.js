@@ -14,21 +14,21 @@ app.use(express.static(path.join(__dirname, '..', 'src', 'public')));
 
 init();
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   const userId = shortid.generate();
 
   res.render('albums', { pageTitle: 'Albums', userId });
 });
 
-app.get('/new', function(req, res) {
+app.get('/new', (req, res) => {
   res.render('albums');
 });
 
-app.post('/img', upload.single('image'), function(req, res) {
+app.post('/img', upload.single('image'), (req, res) => {
   console.log(req.file);
   res.redirect('/');
 })
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
