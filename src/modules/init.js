@@ -7,7 +7,7 @@ export default function() {
   if(!fs.existsSync(file)) {
     fs.writeFileSync(file, JSON.stringify({
       users: [],
-      albums: []
+      albums: {}
     }));
   }
 }
