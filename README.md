@@ -1,6 +1,10 @@
 # Online Photo Album
 *Browser Technologies @cmda-minor-web 20-21*
 
+## Table of contents
+* Wireframes + P/E
+* Web API research
+
 ## Wireframes + P/E
 ### Empty state
 <img src="https://github.com/StanBankras/browser-technologies-2021/blob/master/img/wireframes/empty-state.jpg?raw=true" alt="Empty state" height="500"/>
@@ -112,3 +116,6 @@ Each album can be viewed in a carroussel
 
 #### Pleasurable layer
 * Javascript can allow for nice carroussel experience
+
+## Web API research
+I am most likely going to research the [MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API) for this project, since I might be able to offer users the feature to capture an image and directly put it into their album.
