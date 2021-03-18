@@ -133,3 +133,5 @@ The goal of this project is to build a fully progressive enhanced website that w
 
 ### 3. HTML, CSS & Javascript layer
 * Possibility to use client-side rendering to avoid page refreshes and give the user a more 'appy' experience, as calls for data are handled by Javascript.
+* If localstorage is available, the user ID is stored here and automatically given back with requests. The user won't have to fill it in anymore.
+* ID doesn't have to be as a query in API calls anymore, but could be given back through headers instead.
