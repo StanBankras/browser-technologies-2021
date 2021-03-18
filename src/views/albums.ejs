@@ -1,9 +1,12 @@
 <%- include('./partials/head.ejs'); %>
 <%- include('./partials/header.ejs'); %>
 
-<p>Albums - Your ID: <%= userId %></p>
+<p>Albums</p>
 <form action="/img" method="post" enctype="multipart/form-data">
   <input type="file" name="image" id="image">
+  <button type="submit">Submit</button>
+</form>
+<form action="/create-user" method="post">
   <button type="submit">Submit</button>
 </form>
 
