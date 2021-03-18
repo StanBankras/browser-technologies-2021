@@ -1,15 +1,21 @@
 <%- include('./partials/head.ejs'); %>
 <%- include('./partials/header.ejs'); %>
 
-<p>Albums</p>
-<form action="/img" method="post" enctype="multipart/form-data">
-  <input type="file" name="image" id="image">
-  <button type="submit">Submit</button>
-</form>
-<form action="/create-user" method="post">
-  <button type="submit">Submit</button>
-</form>
+<p>Your albums</p>
 
+<% albums.forEach(album => { %>
+<section>
+  <h2>Album name: <%= album.name %></h2>
+  <p>Album description: <%= album.description %></p>
+</section>
+<% }); %>
 
+<form action="/album/new?userId=<%= userId %>" method="post">
+  <label for="name">Album name</label>
+  <input type="text" name="name" id="name">
+  <label for="description">Album description</label>
+  <textarea type="text" name="description" id="description"></textarea>
+  <button type="submit">New album</button>
+</form>
 
 <%- include('./partials/footer.ejs'); %>

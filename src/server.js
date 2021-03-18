@@ -2,12 +2,14 @@ require('dotenv').config();
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import mongoose, { Schema } from 'mongoose';
+import url from 'url';
+import mongoose from 'mongoose';
 
 import { upload } from './modules/multer';
-import { getBase64FromPath } from './modules/utils';
+import { getBase64FromPath, isMongoId } from './modules/utils';
 import Photo from './schemas/Photo';
 import User from './schemas/User';
+import Album from './schemas/Album';
 
 const app = express();
 const port = 3000;
@@ -27,11 +29,58 @@ app.use(bodyParser.urlencoded({ extended: false }));
     });
   
     app.get('/', (req, res) => {
-      res.render('albums', { pageTitle: 'Albums' });
+      res.render('login', { pageTitle: 'Login' });
     });
-    
-    app.get('/new', (req, res) => {
-      res.render('albums');
+
+    app.get('/albums', async (req, res) => {
+      if(!req.query.id || !mongoose.Types.ObjectId.isValid(req.query.id)) {
+        return res.redirect('/');
+      }
+
+      const user = await User.findById(req.query.id);
+      if(user) {
+        const albums = await Promise.all(user.albums.map(async album => await Album.findById(album._id)));
+        res.render('albums', { pageTitle: 'Albums', albums, userId: user._id });
+      } else {
+        res.redirect('/');
+      }
+    });
+
+    app.post('/album/new', async (req, res) => {
+      if(!req.query.userId || !isMongoId(req.query.userId)) {
+        return res.render('login');
+      }
+
+      const user = await User.findById(req.query.userId);
+      const album = new Album({
+        name: req.body.name,
+        description: req.body.description, 
+        photoIds: []
+      });
+
+      await album.save();
+      user.set('albums', [...user.albums, album._id]);
+      await user.save();
+
+      res.redirect(`/album?id=${album._id}`);
+    });
+
+    app.get('/album', async (req, res) => {
+      const album = await Album.findById(req.query.id);
+      res.render('album', { pageTitle: album.name, album });
+    })
+
+    app.post('/login', async (req, res) => {
+      if(!req.body.id || !isMongoId(req.body.id)) {
+        return res.redirect('/');
+      }
+
+      const user = await User.findById(req.body.id);
+      if(user) {
+        res.redirect(`/albums?id=${user._id.toString()}`);
+      } else {
+        res.redirect('/');
+      }
     });
 
     app.post('/create-user', async (req, res) => {
