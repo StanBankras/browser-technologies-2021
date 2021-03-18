@@ -4,6 +4,7 @@
 ## Table of contents
 * Wireframes + P/E
 * Web API research
+* Progressive enhancement idea
 
 ## Wireframes + P/E
 ### Empty state
@@ -72,7 +73,6 @@ This page is within the second step of creating a new album. The user can attach
 ### New album creation - step 3: order
 <img src="https://github.com/StanBankras/browser-technologies-2021/blob/master/img/wireframes/order.jpg?raw=true" alt="Order photos" height="500"/>
 
-  
 This page is the third step of creating a new album. The user can sort their uploaded images in the order they want.
 
 #### Functional/reliable layer: semantic HTML to use
@@ -90,7 +90,6 @@ This page is the third step of creating a new album. The user can sort their upl
 ### Albums overview
 <img src="https://github.com/StanBankras/browser-technologies-2021/blob/master/img/wireframes/albums.jpg?raw=true" alt="See albums in overview" height="500"/>
 
-  
 This page is the overview if the user has albums.
 
 #### Functional/reliable layer: semantic HTML to use
@@ -104,7 +103,6 @@ This page is the overview if the user has albums.
 ### Carroussel
 <img src="https://github.com/StanBankras/browser-technologies-2021/blob/master/img/wireframes/carroussel.jpg?raw=true" alt="Carroussel" height="500"/>
 
-  
 Each album can be viewed in a carroussel
 
 #### Functional/reliable layer: semantic HTML to use
@@ -119,3 +117,19 @@ Each album can be viewed in a carroussel
 
 ## Web API research
 I am most likely going to research the [MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API) for this project, since I might be able to offer users the feature to capture an image and directly put it into their album.
+
+## Progressive enhancement idea
+The goal of this project is to build a fully progressive enhanced website that works on many different browsers, with / without javascript and with / without CSS. Here's how I technically plan to achieve these so-called layers:
+
+### 1. HTML only layer
+* Allow user to login with their previous ID (to continue with their albums)
+* If they don't have an ID, allow them to generate one
+* Through every navigation, pass this ID with requests to the server and make sure the server always sends it back in the generated HTML
+* Use form methods to communicate data to the server
+
+### 2. HTML & CSS layer
+* Potentially add a more neat progressive disclosure pattern to the album creation page
+* Communication/navigation through the server is the same as the first layer, as there is no javascript yet
+
+### 3. HTML, CSS & Javascript layer
+* Possibility to use client-side rendering to avoid page refreshes and give the user a more 'appy' experience, as calls for data are handled by Javascript.
