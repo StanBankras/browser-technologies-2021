@@ -6,7 +6,7 @@ const Photo = new Schema({
   alt: { type: String, required: false },
   location: { type: String, required: false },
   author: { type: String, required: false },
-  base64: Buffer
+  base64: String
 });
 
 export default model('Photo', Photo);

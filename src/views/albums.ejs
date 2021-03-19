@@ -5,16 +5,17 @@
 
 <% albums.forEach(album => { %>
 <section>
-  <h2>Album name: <%= album.name %></h2>
-  <p>Album description: <%= album.description %></p>
+  <a href="/albums?id=<%= album._id %>">
+    <h2>Album name: <%= album.name %></h2>
+    <p>Album description: <%= album.description %></p>
+  </a>
+  <% album.photos.forEach(photo => { %>
+  <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
+  <% }); %>
 </section>
 <% }); %>
 
-<form action="/album/new?userId=<%= userId %>" method="post">
-  <label for="name">Album name</label>
-  <input type="text" name="name" id="name">
-  <label for="description">Album description</label>
-  <textarea type="text" name="description" id="description"></textarea>
+<form action="/albums/new?userId=<%= userId %>" method="post">
   <button type="submit">New album</button>
 </form>
 
