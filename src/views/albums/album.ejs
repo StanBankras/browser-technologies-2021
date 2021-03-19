@@ -1,7 +1,10 @@
 <%- include('../partials/head.ejs'); %>
-<%- include('./partials/header.ejs'); %>
+<%- include('../partials/header.ejs'); %>
 
 <p>Your album: <%= album.name %></p>
 <p><%= album.description %></p>
+<form action="/albums/<%= album._id %>/delete?userId=<%= userId %>" method="post">
+  <button type="submit">Delete</button>
+</form>
 
 <%- include('../partials/footer.ejs'); %>
