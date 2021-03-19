@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   const user = await User.findById(req.query.id);
   if(user) {
     const albums = await Promise.all(user.albums.map(async album => await Album.findById(album._id)));
-    res.render('albums', { pageTitle: 'Albums', albums, userId: user._id });
+    res.render('albums/index', { pageTitle: 'Albums', albums, userId: user._id });
   } else {
     res.redirect('/');
   }

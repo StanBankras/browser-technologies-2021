@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/img', upload.single('image'), async (req, res) => {
   const albumId = req.query.albumId;
   if(!albumId || !isMongoId(albumId)) {
-    return res.render(`/albums/new/2?id=${albumId}`);
+    return res.redirect(`/albums/new/2?id=${albumId}`);
   }
 
   const base64 = getBase64FromPath(req.file.path);
@@ -70,7 +70,7 @@ router.get('/:step', async (req, res) => {
 
   const album = await Album.findById(req.query.id);
 
-  res.render(`step${step}`, { pageTitle: `Step ${step}: ${album.name}`, album });
+  res.render(`albums/new/step${step}`, { pageTitle: `Step ${step}: ${album.name}`, album });
 });
 
 export default router;

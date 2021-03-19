@@ -1,12 +1,11 @@
 import express from 'express';
 
 import { isMongoId } from '../modules/utils';
-
 import User from '../schemas/User';
 
 const router = express.Router();
 
-router.get('/', (req, res) => res.render('login', { pageTitle: 'Login' }));
+router.get('/', (req, res) => res.render('auth/index', { pageTitle: 'Login' }));
 
 router.post('/login', async (req, res) => {
   if(!req.body.id || !isMongoId(req.body.id)) {
@@ -26,7 +25,7 @@ router.post('/create-user', async (req, res) => {
   user.name = req.body.name ? req.body.name : undefined;
   await user.save();
 
-  res.render('id', { userId: user._id, pageTitle: 'Title' })
+  res.render('auth/id', { userId: user._id, pageTitle: 'Title' })
 });
 
 export default router;
