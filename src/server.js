@@ -3,9 +3,6 @@ import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
 
-import User from './schemas/User';
-import Album from './schemas/Album';
-
 import albumRoutes from './routes/albums/index';
 import newAlbumRoutes from './routes/albums/new';
 import authRoutes from './routes/auth';
