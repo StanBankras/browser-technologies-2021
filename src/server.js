@@ -31,7 +31,6 @@ app.use(express.urlencoded({ extended: false }));
       .use('/albums', albumRoutes)
       .use('/albums/new', newAlbumRoutes)
       .use('/', authRoutes)
-      .get('/', (req, res) => res.render('login', { pageTitle: 'Login' }))
       .listen(port, () => console.info(`server is running on port ${port}`));
       
   } catch(err) {

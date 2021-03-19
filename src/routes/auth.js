@@ -6,6 +6,8 @@ import User from '../schemas/User';
 
 const router = express.Router();
 
+router.get('/', (req, res) => res.render('login', { pageTitle: 'Login' }));
+
 router.post('/login', async (req, res) => {
   if(!req.body.id || !isMongoId(req.body.id)) {
     return res.redirect('/');
