@@ -1,20 +1,19 @@
 import express from 'express';
+import shortid from 'shortid';
 
 import { upload } from '../../modules/multer';
 import { isMongoId, getBase64FromPath } from '../../modules/utils';
-import Album from '../../schemas/Album';
 import User from '../../schemas/User';
 
 const router = express.Router();
 
 router.post('/img', upload.single('image'), async (req, res) => {
   const albumId = req.query.albumId;
-  if(!albumId || !isMongoId(albumId)) {
-    return res.redirect(`/albums/new/2?id=${albumId}`);
-  }
+  const userId = req.query.userId;
 
   const base64 = getBase64FromPath(req.file.path);
   const photo = {
+    id: shortid.generate(),
     base64,
     alt: req.body.altundefined,
     description: req.body.description,
@@ -22,25 +21,28 @@ router.post('/img', upload.single('image'), async (req, res) => {
     location: req.body.location
   }
   
-  const album = await Album.findById(albumId);
+  const user = await User.findById(userId);
+  const album = user.albums.find(a => a.id === albumId);
   album.photos = [...album.photos, photo];
-  await album.save();
+  await user.save();
 
-  res.redirect(`/albums/new/2?id=${albumId}`);
+  res.redirect(`/albums/new/2?id=${albumId}&userId=${userId}`);
 });
 
 router.post('/:step?', async (req, res) => {
+  const user = await User.findById(req.query.userId);
+
   if(req.params.step) {
     if(req.params.step === '1') {
-      const album = await Album.findById(req.query.id);
+      const album = user.albums.find(a => a.id === req.query.id);
       album.name = req.body.name;
       album.description = req.body.description;
-
-      await album.save();
-      return res.redirect(`/albums/new/2?id=${req.query.id}`);
+      await user.save();
+      
+      return res.redirect(`/albums/new/2?userId=${req.query.userId}&id=${req.query.id}`);
     }
     if(req.params.step === '2') {
-      return res.redirect(`/albums/new/3?id=${req.query.id}`);
+      return res.redirect(`/albums/new/3?userId=${req.query.userId}&id=${req.query.id}`);
     }
   }
 
@@ -48,18 +50,17 @@ router.post('/:step?', async (req, res) => {
     return res.redirect('/');
   }
 
-  const user = await User.findById(req.query.userId);
-  const album = new Album({
-    name: req.body.name,
-    description: req.body.description, 
+  const album = {
+    id: shortid.generate(),
+    name: req.body.name || '',
+    description: req.body.description || '', 
     photos: []
-  });
+  };
 
-  await album.save();
-  user.set('albums', [...user.albums, album._id]);
+  user.albums = [...user.albums, album];
   await user.save();
 
-  res.redirect(`/albums/new/1?id=${album._id}`);
+  res.redirect(`/albums/new/1?userId=${req.query.userId}&id=${album.id}`);
 });
 
 router.get('/:step', async (req, res) => {
@@ -68,9 +69,10 @@ router.get('/:step', async (req, res) => {
     return res.redirect('/');
   }
 
-  const album = await Album.findById(req.query.id);
+  const user = await User.findById(req.query.userId);
+  const album = user.albums.find(a => a.id === req.query.id);
 
-  res.render(`albums/new/step${step}`, { pageTitle: `Step ${step}: ${album.name}`, album });
+  res.render(`albums/new/step${step}`, { pageTitle: `Step ${step}: ${album.name}`, album, userId: user._id });
 });
 
 export default router;

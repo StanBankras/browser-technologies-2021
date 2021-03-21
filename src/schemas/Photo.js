@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose';
+import { Schema } from 'mongoose';
 
 const Photo = new Schema({
+  id: String,
   name: { type: String, required: false },
   description: { type: String, required: false },
   alt: { type: String, required: false },
@@ -9,4 +10,4 @@ const Photo = new Schema({
   base64: String
 });
 
-export default model('Photo', Photo);
+export default Photo;

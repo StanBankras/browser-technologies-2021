@@ -3,16 +3,20 @@
 
 <p>Photos:</p>
 <% album.photos.forEach(photo => { %>
-<img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
+<div>
+  <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
+  <form action="/albums/<%= album._id %>/<%= photo.id %>/delete&userId=<%= userId %>" method="post">
+    <button type="submit">Delete</button>
+  </form>
+</div>
 <% }); %>
 
-<form action="/albums/new/img?albumId=<%= album._id %>" method="post" enctype="multipart/form-data">
+<form action="/albums/new/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
   <label for="image">Add image to album</label>
   <input type="file" name="image" id="image">
   <button type="submit">Add</button>
 </form>
-<p>/album/new/3?id=<%= album._id %></p>
-<form action="/albums/new/2?id=<%= album._id %>" method="post">
+<form action="/albums/new/2?id=<%= album.id %>&userId=<%= userId %>" method="post">
   <button type="submit">Step 3</button>
 </form>
 

@@ -5,7 +5,7 @@
 
 <% albums.forEach(album => { %>
 <section>
-  <a href="/albums/<%= album._id %>?userId=<%= userId %>">
+  <a href="/albums/<%= album.id %>?userId=<%= userId %>">
     <h2>Album name: <%= album.name %></h2>
     <p>Album description: <%= album.description %></p>
   </a>

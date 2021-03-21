@@ -1,9 +1,11 @@
-import { Schema, model } from 'mongoose';
+import { Schema } from 'mongoose';
+import Photo from './Photo';
 
 const Album = new Schema({
+  id: String,
   name: String,
   description: String,
-  photos: { type: Array }
+  photos: [Photo]
 });
 
-export default model('Album', Album);
+export default Album;

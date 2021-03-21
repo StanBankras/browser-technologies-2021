@@ -16,21 +16,16 @@ app.use(express.static(path.join(__dirname, '..', 'src', 'public')));
 app.use(express.urlencoded({ extended: false }));
 
 (async function() {
-  try {
-    await mongoose.connect(process.env.DATABASE_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true
-    });
+  await mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  });
 
-    app
-      .use('/albums', albumRoutes)
-      .use('/albums/new', newAlbumRoutes)
-      .use('/', authRoutes)
-      .listen(port, () => console.info(`server is running on port ${port}`));
-      
-  } catch(err) {
-    console.error(err);
-  }
+  app
+    .use('/albums', albumRoutes)
+    .use('/albums/new', newAlbumRoutes)
+    .use('/', authRoutes)
+    .listen(port, () => console.info(`server is running on port ${port}`));
 })();

@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
 
   const user = await User.findById(req.body.id);
   if(user) {
-    res.redirect(`/albums?id=${user._id.toString()}`);
+    res.redirect(`/albums?userId=${user._id.toString()}`);
   } else {
     res.redirect('/');
   }

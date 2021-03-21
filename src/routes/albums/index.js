@@ -8,31 +8,35 @@ import User from '../../schemas/User';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  if(!req.query.id || !isMongoId(req.query.id)) {
+  if(!req.query.userId || !isMongoId(req.query.userId)) {
     return res.redirect('/');
   }
 
-  const user = await User.findById(req.query.id);
+  const user = await User.findById(req.query.userId);
   if(user) {
-    const albums = await Promise.all(user.albums.map(async album => await Album.findById(album._id)));
-    res.render('albums/index', { pageTitle: 'Albums', albums, userId: user._id });
+    res.render('albums/index', { pageTitle: 'Albums', albums: user.albums, userId: user._id });
   } else {
     res.redirect('/');
   }
 });
 
 router.get('/:id', async (req, res) => {
-  const album = await Album.findById(req.params.id);
+  const user = await User.findById(req.query.userId);
+  const album = user.albums.find(a => a.id === req.params.id);
   res.render('albums/album', { pageTitle: album.name, album, userId: req.query.userId });
 });
 
 router.post('/:id/delete', async (req, res) => {
-  const album = await Album.findByIdAndDelete(req.params.id);
-  const user = await User.findOne({ albums: mongoose.Types.ObjectId(req.params.id) });
-  user.albums = user.albums.filter(a => a.toString() !== req.params.id);
+  const user = await User.findById(req.query.userId);
+  user.albums = user.albums.filter(a => a.id !== req.params.id);
+  console.log(req.params.id, user.albums.map(a => a.id));
   await user.save();
 
-  res.redirect(`/albums?id=${req.query.userId}`)
+  res.redirect(`/albums?userId=${req.query.userId}`)
+});
+
+router.post('/:albumId/:imgId/delete', (req, res) => {
+
 });
 
 export default router;
