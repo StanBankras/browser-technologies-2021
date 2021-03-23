@@ -40,6 +40,11 @@ router.post('/:albumId/:imgId/delete', async (req, res) => {
   const imgId = req.params.imgUd;
   const user = await User.findById(userId);
   const album = user.albums.find(a => a.id === albumId);
+
+  if(!user || !album) {
+    return res.redirect(`/albums?id=${albumId}`);
+  }
+
   album.photos = albums.photos.filter(p => p.id !== imgId);
   await user.save();
 
