@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
     "clean": "rm -rf dist && mkdir dist",
+    "move": "cp -a src/views dist && cp -a src/public dist",
     "build-babel": "babel -d ./dist ./src -s",
-    "build": "npm run clean && npm run build-babel && mkdir dist/data && mkdir dist/data/images",
+    "build": "npm run clean && npm run build-babel && mkdir dist/data && mkdir dist/data/images && npm run move",
     "start": "npm run build && node ./dist/server.js"
   },
   "dependencies": {
