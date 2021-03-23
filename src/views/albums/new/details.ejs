@@ -1,7 +1,7 @@
 <%- include('../../partials/head.ejs'); %>
 <%- include('../../partials/header.ejs'); %>
 
-<form action="/albums/new/1?id=<%= album.id %>&userId=<%= userId %>" method="post">
+<form action="/albums/new/details?id=<%= album.id %>&userId=<%= userId %>" method="post">
   <label for="name">Album name</label>
   <input type="text" name="name" id="name">
   <label for="description">Album description</label>

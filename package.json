@@ -4,7 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/server.js",
+    "clean": "rm -rf dist && mkdir dist",
+    "build-babel": "babel -d ./dist ./src -s",
+    "build": "npm run clean && npm run build-babel && mkdir dist/data && mkdir dist/data/images",
+    "start": "npm run build && node ./dist/server.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

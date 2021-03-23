@@ -1,5 +1,13 @@
 {
+  "sourceFileName": "./src/server.js",
   "presets": [
-    "@babel/preset-env"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        }
+      }
+    ]
   ]
 }

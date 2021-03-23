@@ -12,12 +12,12 @@ router.post('/img', upload.single('image'), async (req, res) => {
   const userId = req.query.userId;
   const user = await User.findById(userId);
   const album = user.albums.find(a => a.id === albumId);
-  const order = album.photos.length > 0 ? album.photos.sort((a, b) => b.order - a.order)[0].order + 1 : 0;
+  const order = album.photos.length > 0 ? album.photos.sort((a, b) => b.order - a.order)[0].order : 0;
 
   const base64 = getBase64FromPath(req.file.path);
   const photo = {
     id: shortid.generate(),
-    order,
+    order: order + 1,
     base64,
     alt: req.body.altundefined,
     description: req.body.description,
@@ -28,7 +28,7 @@ router.post('/img', upload.single('image'), async (req, res) => {
   album.photos = [...album.photos, photo];
   await user.save();
 
-  res.redirect(`/albums/new/2?id=${albumId}&userId=${userId}`);
+  res.redirect(`/albums/new/upload?id=${albumId}&userId=${userId}`);
 });
 
 router.post('/:albumId/:imgId/delete', async (req, res) => {
@@ -38,9 +38,20 @@ router.post('/:albumId/:imgId/delete', async (req, res) => {
   const user = await User.findById(userId);
   const album = user.albums.find(a => a.id === albumId);
   album.photos = album.photos.filter(p => p.id !== imgId);
+  const sortedPhotos = album.photos.sort((a, b) => a.order - b.order);
+  const newPhotos = [];
+  
+  for(let i = 0; i < sortedPhotos.length; i++) {
+    const photo = sortedPhotos[i];
+    photo.order = i;
+    newPhotos.push(photo);
+  }
+
+  album.photos = newPhotos;
+
   await user.save();
 
-  res.redirect(`/albums/new/2?id=${albumId}&userId=${userId}`);
+  res.redirect(`/albums/new/upload?id=${albumId}&userId=${userId}`);
 });
 
 router.post('/:albumId/:imgId/order/:direction', async (req, res) => {
@@ -67,23 +78,23 @@ router.post('/:albumId/:imgId/order/:direction', async (req, res) => {
     }
   }
 
-  res.redirect(`/albums/new/3?id=${albumId}&userId=${userId}`);
+  res.redirect(`/albums/new/sort?id=${albumId}&userId=${userId}`);
 });
 
 router.post('/:step?', async (req, res) => {
   const user = await User.findById(req.query.userId);
 
   if(req.params.step) {
-    if(req.params.step === '1') {
+    if(req.params.step === 'details') {
       const album = user.albums.find(a => a.id === req.query.id);
       album.name = req.body.name;
       album.description = req.body.description;
       await user.save();
       
-      return res.redirect(`/albums/new/2?userId=${req.query.userId}&id=${req.query.id}`);
+      return res.redirect(`/albums/new/upload?userId=${req.query.userId}&id=${req.query.id}`);
     }
-    if(req.params.step === '2') {
-      return res.redirect(`/albums/new/3?userId=${req.query.userId}&id=${req.query.id}`);
+    if(req.params.step === 'upload') {
+      return res.redirect(`/albums/new/sort?userId=${req.query.userId}&id=${req.query.id}`);
     }
   }
 
@@ -101,19 +112,19 @@ router.post('/:step?', async (req, res) => {
   user.albums = [...user.albums, album];
   await user.save();
 
-  res.redirect(`/albums/new/1?userId=${req.query.userId}&id=${album.id}`);
+  res.redirect(`/albums/new/details?userId=${req.query.userId}&id=${album.id}`);
 });
 
 router.get('/:step', async (req, res) => {
   const step = req.params.step;
-  if(!['1', '2', '3'].includes(step)) {
+  if(!['details', 'upload', 'sort'].includes(step)) {
     return res.redirect('/');
   }
 
   const user = await User.findById(req.query.userId);
   const album = user.albums.find(a => a.id === req.query.id);
 
-  res.render(`albums/new/step${step}`, { pageTitle: `Step ${step}: ${album.name}`, album, userId: user._id });
+  res.render(`albums/new/${step}`, { pageTitle: `${step}: ${album.name}`, album, userId: user._id });
 });
 
 export default router;

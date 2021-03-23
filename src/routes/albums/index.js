@@ -29,7 +29,6 @@ router.get('/:id', async (req, res) => {
 router.post('/:id/delete', async (req, res) => {
   const user = await User.findById(req.query.userId);
   user.albums = user.albums.filter(a => a.id !== req.params.id);
-  console.log(req.params.id, user.albums.map(a => a.id));
   await user.save();
 
   res.redirect(`/albums?userId=${req.query.userId}`)

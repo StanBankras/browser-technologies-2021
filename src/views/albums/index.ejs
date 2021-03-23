@@ -9,7 +9,7 @@
     <h2>Album name: <%= album.name %></h2>
     <p>Album description: <%= album.description %></p>
   </a>
-  <% album.photos.forEach(photo => { %>
+  <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
   <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
   <% }); %>
 </section>
