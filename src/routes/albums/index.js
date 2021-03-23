@@ -35,8 +35,16 @@ router.post('/:id/delete', async (req, res) => {
   res.redirect(`/albums?userId=${req.query.userId}`)
 });
 
-router.post('/:albumId/:imgId/delete', (req, res) => {
+router.post('/:albumId/:imgId/delete', async (req, res) => {
+  const albumId = req.params.albumId;
+  const userId = req.query.userId;
+  const imgId = req.params.imgUd;
+  const user = await User.findById(userId);
+  const album = user.albums.find(a => a.id === albumId);
+  album.photos = albums.photos.filter(p => p.id !== imgId);
+  await user.save();
 
+  res.redirect(`/albums?id=${albumId}`);
 });
 
 export default router;

@@ -5,7 +5,7 @@
 <% album.photos.forEach(photo => { %>
 <div>
   <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
-  <form action="/albums/<%= album._id %>/<%= photo.id %>/delete&userId=<%= userId %>" method="post">
+  <form action="/albums/new/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
     <button type="submit">Delete</button>
   </form>
 </div>

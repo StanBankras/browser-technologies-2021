@@ -10,10 +10,14 @@ const router = express.Router();
 router.post('/img', upload.single('image'), async (req, res) => {
   const albumId = req.query.albumId;
   const userId = req.query.userId;
+  const user = await User.findById(userId);
+  const album = user.albums.find(a => a.id === albumId);
+  const order = album.photos.length > 0 ? album.photos.sort((a, b) => b.order - a.order)[0].order + 1 : 0;
 
   const base64 = getBase64FromPath(req.file.path);
   const photo = {
     id: shortid.generate(),
+    order,
     base64,
     alt: req.body.altundefined,
     description: req.body.description,
@@ -21,12 +25,49 @@ router.post('/img', upload.single('image'), async (req, res) => {
     location: req.body.location
   }
   
-  const user = await User.findById(userId);
-  const album = user.albums.find(a => a.id === albumId);
   album.photos = [...album.photos, photo];
   await user.save();
 
   res.redirect(`/albums/new/2?id=${albumId}&userId=${userId}`);
+});
+
+router.post('/:albumId/:imgId/delete', async (req, res) => {
+  const albumId = req.params.albumId;
+  const userId = req.query.userId;
+  const imgId = req.params.imgId;
+  const user = await User.findById(userId);
+  const album = user.albums.find(a => a.id === albumId);
+  album.photos = album.photos.filter(p => p.id !== imgId);
+  await user.save();
+
+  res.redirect(`/albums/new/2?id=${albumId}&userId=${userId}`);
+});
+
+router.post('/:albumId/:imgId/order/:direction', async (req, res) => {
+  const albumId = req.params.albumId;
+  const userId = req.query.userId;
+  const imgId = req.params.imgId;
+  const user = await User.findById(userId);
+  const album = user.albums.find(a => a.id === albumId);
+  const photo = album.photos.find(p => p.id === imgId);
+
+  if(req.params.direction === 'down') {
+    const prevPhoto = album.photos.find(p => p.order === photo.order + 1);
+    if(prevPhoto) {
+      photo.order += 1;
+      prevPhoto.order -= 1;
+      await user.save();
+    }
+  } else {
+    const nextPhoto = album.photos.find(p => p.order === photo.order - 1);
+    if(nextPhoto) {
+      photo.order -= 1;
+      nextPhoto.order += 1;
+      await user.save();
+    }
+  }
+
+  res.redirect(`/albums/new/3?id=${albumId}&userId=${userId}`);
 });
 
 router.post('/:step?', async (req, res) => {

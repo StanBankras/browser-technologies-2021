@@ -1,6 +1,17 @@
 <%- include('../../partials/head.ejs'); %>
 <%- include('../../partials/header.ejs'); %>
 
-<p>Step 3:</p>
+<% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
+  <div>
+    <p>Order: <%= photo.order %></p>
+    <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
+    <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
+      <button type="submit">Move up</button>
+    </form>
+    <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
+      <button type="submit">Move down</button>
+    </form>
+  </div>
+  <% }); %>
 
 <%- include('../../partials/footer.ejs'); %>

@@ -2,6 +2,7 @@ import { Schema } from 'mongoose';
 
 const Photo = new Schema({
   id: String,
+  order: { type: Number, min: 0, unique: true },
   name: { type: String, required: false },
   description: { type: String, required: false },
   alt: { type: String, required: false },
