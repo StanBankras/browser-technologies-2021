@@ -71,6 +71,10 @@ router.post('/:albumId/:imgId/order/:direction', async (req, res) => {
   const album = user.albums.find(a => a.id === albumId);
   const photo = album.photos.find(p => p.id === imgId);
 
+  if(!albumId || !userId || !user || !imgId || !album || !photo || !['up', 'down'].includes(req.params.direction)) {
+    return res.redirect(`/albums/new/sort?id=${albumId}&userId=${userId}`);
+  }
+
   if(req.params.direction === 'down') {
     const prevPhoto = album.photos.find(p => p.order === photo.order + 1);
     if(prevPhoto) {
@@ -91,6 +95,9 @@ router.post('/:albumId/:imgId/order/:direction', async (req, res) => {
 });
 
 router.post('/:step?', async (req, res) => {
+  if(!req.query.userId || !isMongoId(req.query.userId)) {
+    return res.redirect('/');
+  }
   const user = await User.findById(req.query.userId);
 
   if(req.params.step) {
@@ -105,10 +112,6 @@ router.post('/:step?', async (req, res) => {
     if(req.params.step === 'upload') {
       return res.redirect(`/albums/new/sort?userId=${req.query.userId}&id=${req.query.id}`);
     }
-  }
-
-  if(!req.query.userId || !isMongoId(req.query.userId)) {
-    return res.redirect('/');
   }
 
   const album = {
