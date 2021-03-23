@@ -22,7 +22,6 @@ router.post('/login', async (req, res) => {
 
 router.post('/create-user', async (req, res) => {
   const user = new User();
-  user.name = req.body.name ? req.body.name : undefined;
   await user.save();
 
   res.render('auth/id', { userId: user._id, pageTitle: 'Title' })

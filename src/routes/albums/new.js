@@ -14,6 +14,10 @@ router.post('/img', upload.single('image'), async (req, res) => {
   const album = user.albums.find(a => a.id === albumId);
   const order = album.photos.length > 0 ? album.photos.sort((a, b) => b.order - a.order)[0].order : 0;
 
+  if(!albumId || !userId || !user || !album || !req.file) {
+    return res.redirect(`/albums/new/upload?id=${albumId}&userId=${userId}`);
+  }
+
   const base64 = getBase64FromPath(req.file.path);
   const photo = {
     id: shortid.generate(),
@@ -36,6 +40,11 @@ router.post('/:albumId/:imgId/delete', async (req, res) => {
   const userId = req.query.userId;
   const imgId = req.params.imgId;
   const user = await User.findById(userId);
+
+  if(!albumId || !userId || !user || !imgId) {
+    return res.redirect(`/albums/new/upload?id=${albumId}&userId=${userId}`);
+  }
+  
   const album = user.albums.find(a => a.id === albumId);
   album.photos = album.photos.filter(p => p.id !== imgId);
   const sortedPhotos = album.photos.sort((a, b) => a.order - b.order);

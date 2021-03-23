@@ -1,22 +1,36 @@
 <%- include('../partials/head.ejs'); %>
 <%- include('../partials/header.ejs'); %>
 
-<p>Your albums</p>
-
-<% albums.forEach(album => { %>
-<section>
-  <a href="/albums/<%= album.id %>?userId=<%= userId %>">
-    <h2>Album name: <%= album.name %></h2>
-    <p>Album description: <%= album.description %></p>
-  </a>
-  <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
-  <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
+<section id="overview">
+  <div class="top">
+    <h1>Your albums</h1>
+    <% if(albums && albums.length > 0) { %>
+    <form action="/albums/new?userId=<%= userId %>" method="post">
+      <button type="submit">New album</button>
+    </form>
+    <% } %>
+  </div>
+  <% if(!albums || albums.length === 0) { %>
+  <section class="first-use">
+    <h2>You have no albums yet.</h2>
+    <form action="/albums/new?userId=<%= userId %>" method="post">
+      <button type="submit">Create your first album</button>
+    </form>
+  </section>
+  <% } else { %>
+  <% albums.forEach(album => { %>
+  <section>
+    <a href="/albums/<%= album.id %>?userId=<%= userId %>">
+      <h2><%= album.name %></h2>
+    </a>
+    <div class="thumbnails">
+      <% album.photos.sort((a, b) => a.order - b.order).slice(0, 3).forEach(photo => { %>
+      <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
+      <% }); %>
+    </div>
+  </section>
   <% }); %>
+  <% } %>
 </section>
-<% }); %>
-
-<form action="/albums/new?userId=<%= userId %>" method="post">
-  <button type="submit">New album</button>
-</form>
 
 <%- include('../partials/footer.ejs'); %>

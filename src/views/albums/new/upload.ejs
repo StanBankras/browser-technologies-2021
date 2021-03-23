@@ -1,7 +1,8 @@
 <%- include('../../partials/head.ejs'); %>
 <%- include('../../partials/header.ejs'); %>
 
-<p>Photos:</p>
+<h1>Upload photos</h1>
+
 <% album.photos.forEach(photo => { %>
 <div>
   <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
