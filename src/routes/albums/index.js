@@ -7,48 +7,49 @@ import User from '../../schemas/User';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  if(!req.query.userId || !isMongoId(req.query.userId)) {
-    return res.redirect('/');
-  }
+router
+  .post('/:albumId/delete', async (req, res) => {
+    const user = await User.findById(req.query.userId);
+    user.albums = user.albums.filter(a => a.id !== req.params.albumId);
+    await user.save();
 
-  const user = await User.findById(req.query.userId);
-  if(user) {
-    res.render('albums/index', { pageTitle: 'Albums', albums: user.albums, userId: user._id });
-  } else {
-    res.redirect('/');
-  }
-});
+    res.redirect(`/albums?userId=${req.query.userId}`)
+  })
 
-router.get('/:id', async (req, res) => {
-  const user = await User.findById(req.query.userId);
-  const album = user.albums.find(a => a.id === req.params.id);
-  res.render('albums/album', { pageTitle: album.name, album, userId: req.query.userId });
-});
+  .post('/:albumId/:imgId/delete', async (req, res) => {
+    const albumId = req.params.albumId;
+    const userId = req.query.userId;
+    const imgId = req.params.imgUd;
+    const user = await User.findById(userId);
+    const album = user.albums.find(a => a.id === albumId);
 
-router.post('/:id/delete', async (req, res) => {
-  const user = await User.findById(req.query.userId);
-  user.albums = user.albums.filter(a => a.id !== req.params.id);
-  await user.save();
+    if(!user || !album) {
+      return res.redirect(`/albums?id=${albumId}`);
+    }
 
-  res.redirect(`/albums?userId=${req.query.userId}`)
-});
+    album.photos = albums.photos.filter(p => p.id !== imgId);
+    await user.save();
 
-router.post('/:albumId/:imgId/delete', async (req, res) => {
-  const albumId = req.params.albumId;
-  const userId = req.query.userId;
-  const imgId = req.params.imgUd;
-  const user = await User.findById(userId);
-  const album = user.albums.find(a => a.id === albumId);
+    res.redirect(`/albums?id=${albumId}`);
+  })
 
-  if(!user || !album) {
-    return res.redirect(`/albums?id=${albumId}`);
-  }
+  .get('/', async (req, res) => {
+    if(!req.query.userId || !isMongoId(req.query.userId)) {
+      return res.redirect('/');
+    }
 
-  album.photos = albums.photos.filter(p => p.id !== imgId);
-  await user.save();
+    const user = await User.findById(req.query.userId);
+    if(user) {
+      res.render('albums/index', { pageTitle: 'Albums', albums: user.albums, userId: user._id });
+    } else {
+      res.redirect('/');
+    }
+  })
 
-  res.redirect(`/albums?id=${albumId}`);
-});
+  .get('/:id', async (req, res) => {
+    const user = await User.findById(req.query.userId);
+    const album = user.albums.find(a => a.id === req.params.id);
+    res.render('albums/album', { pageTitle: album.name, album, userId: req.query.userId });
+  });
 
 export default router;
