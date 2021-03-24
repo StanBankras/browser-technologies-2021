@@ -138,7 +138,7 @@ The goal of this project is to build a fully progressive enhanced website that w
 ### 3. HTML, CSS & Javascript layer
 * Possibility to use client-side rendering to avoid page refreshes and give the user a more 'appy' experience, as calls for data are handled by Javascript.
 * If localstorage is available, the user ID is stored here and automatically given back with requests. The user won't have to fill it in anymore.
-* Requests for posting can mostly be handled by javascript clientside, instead of navigating to a post route with the browser through a form.
+* Use MediaStream Image Capture API if available to allow user to capture images and directly insert it into the album
 
 ## Core functionalities
 * Create new photo album (name & description)
