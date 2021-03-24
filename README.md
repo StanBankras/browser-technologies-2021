@@ -1,10 +1,14 @@
 # Online Photo Album
 *Browser Technologies @cmda-minor-web 20-21*
 
+## [Live demo](https://pe-photo-album.herokuapp.com/)
+
 ## Table of contents
 * Wireframes + P/E
 * Web API research
 * Progressive enhancement idea
+* Core functionalities
+* Browsers I will test in
 
 ## Wireframes + P/E
 ### Empty state
@@ -134,4 +138,19 @@ The goal of this project is to build a fully progressive enhanced website that w
 ### 3. HTML, CSS & Javascript layer
 * Possibility to use client-side rendering to avoid page refreshes and give the user a more 'appy' experience, as calls for data are handled by Javascript.
 * If localstorage is available, the user ID is stored here and automatically given back with requests. The user won't have to fill it in anymore.
-* ID doesn't have to be as a query in API calls anymore, but could be given back through headers instead.
+* Requests for posting can mostly be handled by javascript clientside, instead of navigating to a post route with the browser through a form.
+
+## Core functionalities
+* Create new photo album (name & description)
+* Add photos to the album
+* Order photos differently in the album
+* Edit existing albums
+* Attach metadata to photos
+* View the album in carroussel or slideshow
+
+## Browsers I will test
+* Browsers desktop: chrome & firefox
+* Mobile: iOS & Android (safari & chrome)
+
+**Web technology I will research**
+* [MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API)
