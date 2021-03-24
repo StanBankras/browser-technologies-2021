@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <li>
-          <% if (userId) { %>
+          <% if (typeof(userId) !== 'undefined') { %>
           <a href="/albums?userId=<%= userId %>">Albums</a>
           <% } else { %>
           <a href="/">Logout</a>
