@@ -8,7 +8,7 @@
 :root {
   --primary: #09806a;
   --primary-darken: #09806a;
-  --primary-lighten: #48ecce;
+  --primary-lighten: #1fb196;
   --secondary: #0c5c44;
   --dark: #e7e7e7;
   --background: #ffffff;
@@ -60,6 +60,10 @@ h2 {
   font-size: 1.5rem;
 }
 
+p {
+  max-width: 50rem;
+}
+
 a {
   color: #867a73;
 }
@@ -95,15 +99,7 @@ textarea {
   max-height: 200px;
 }
 
-#overview .thumbnails {
-  margin-top: 1rem;
-}
-
-#overview .thumbnails img {
-  max-height: 100px;
-}
-
-#overview .top {
+.top {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -115,12 +111,20 @@ textarea {
           align-items: center;
 }
 
-#overview .top * {
+.top * {
   display: inline-block;
 }
 
-#overview .top h1 {
+.top h1 {
   margin-bottom: 0;
+}
+
+#overview .thumbnails {
+  margin-top: 1rem;
+}
+
+#overview .thumbnails img {
+  max-height: 100px;
 }
 
 #overview .first-use {
@@ -163,6 +167,23 @@ textarea {
 
 .album .images img {
   max-height: 200px;
+}
+
+.album .top {
+  margin-bottom: 2rem;
+}
+
+.album .description {
+  margin-top: 2rem;
+}
+
+.album ul {
+  padding-left: 30px;
+  margin-top: 1rem;
+}
+
+.album ul li {
+  margin-bottom: 0.5rem;
 }
 
 .album-details form {

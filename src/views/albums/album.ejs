@@ -2,18 +2,37 @@
 <%- include('../partials/header.ejs'); %>
 
 <section class="album">
-  <h1><%= album.name %></h1>
-  <p class="description"><%= album.description %></p>
-  
+  <div class="top">
+    <h1><%= album.name %></h1>  
+    <form action="/albums/<%= album.id %>/delete?userId=<%= userId %>" method="post">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
   <section class="images">
-    <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
+    <% album.photos.sort((a, b) => a.order - b.order).slice(0, 3).forEach(photo => { %>
     <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
     <% }); %>
   </section>
-  
-  <form action="/albums/<%= album.id %>/delete?userId=<%= userId %>" method="post">
-    <button type="submit">Delete</button>
-  </form>
+  <p class="description"><%= album.description %></p>
+  <h3>About this album</h3>
+  <ul>
+    <li><%= album.photos.length %> photos in the album</li>
+    <% 
+      const authors = album.photos.map(p => p.author);
+      const count = {};
+      authors.forEach(el => count[el] = count[el] + 1 || 1);
+      const highest = Object.values(count).sort((a, b) => b - a)[0];
+      let index;
+      if (highest) {
+        index = Object.values(count).indexOf(highest);
+      }
+      if(Object.keys(count)[index] && Object.keys(count)[index] !== 'undefined') {
+    %>
+    <li>The photos were mainly taken by <%= Object.keys(count)[index] %></li>
+    <% } else { %>
+    <li>The photos were taken by different photographers</li>
+    <% } %>
+  </ul>
 </section>
 
 <%- include('../partials/footer.ejs'); %>

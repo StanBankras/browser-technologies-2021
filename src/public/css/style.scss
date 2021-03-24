@@ -7,7 +7,7 @@
 :root {
   --primary: #09806a;
   --primary-darken: #09806a;
-  --primary-lighten: #48ecce;
+  --primary-lighten: #1fb196;
   --secondary: #0c5c44;
   --dark: #e7e7e7;
   --background: #ffffff;
@@ -60,6 +60,10 @@ h2 {
   font-size: 1.5rem;
 }
 
+p {
+  max-width: 50rem;
+}
+
 a {
   color: #867a73;
 }
@@ -95,22 +99,23 @@ textarea {
   }
 }
 
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  * {
+    display: inline-block;
+  }
+  h1 {
+    margin-bottom: 0;
+  }
+}
+
 #overview {
   .thumbnails {
     margin-top: 1rem;
     img {
       max-height: 100px;
-    }
-  }
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    * {
-      display: inline-block;
-    }
-    h1 {
-      margin-bottom: 0;
     }
   }
   .first-use {
@@ -142,6 +147,19 @@ textarea {
     flex-wrap: wrap;
     img {
       max-height: 200px;
+    }
+  }
+  .top {
+    margin-bottom: 2rem;
+  }
+  .description {
+    margin-top: 2rem;
+  }
+  ul {
+    padding-left: 30px;
+    margin-top: 1rem;
+    li {
+      margin-bottom: 0.5rem;
     }
   }
 }
