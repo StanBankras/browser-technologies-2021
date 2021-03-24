@@ -1,0 +1,12 @@
+<%- include('../partials/head.ejs'); %>
+<%- include('../partials/header.ejs'); %>
+
+<section class="photos">
+  <h1>Your photos</h1>
+  <% photos.forEach(base64 => { %>
+  <img src="data:image/jpeg;base64,<%= base64 %>"/>
+  <% }); %>
+
+</section>
+
+<%- include('../partials/footer.ejs'); %>

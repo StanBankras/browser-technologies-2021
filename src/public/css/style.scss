@@ -25,6 +25,10 @@ header {
   nav {
     ul {
       list-style: none;
+      display: flex;
+      li {
+        margin-right: 1rem;
+      }
       a {
         color: white;
         font-weight: bold;

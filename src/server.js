@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import albumRoutes from './routes/albums/index';
 import newAlbumRoutes from './routes/albums/new';
 import authRoutes from './routes/auth';
+import photoRoutes from './routes/photos/index';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: false }));
   });
 
   app
+    .use('/photos', photoRoutes)
     .use('/albums', albumRoutes)
     .use('/albums/new', newAlbumRoutes)
     .use('/', authRoutes)
