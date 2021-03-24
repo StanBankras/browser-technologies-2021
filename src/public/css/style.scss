@@ -5,10 +5,11 @@
 }
 
 :root {
-  --primary: #21ccac;
+  --primary: #09806a;
+  --primary-darken: #09806a;
   --primary-lighten: #48ecce;
-  --secondary: #5cbfa1;
-  --dark: #cccccc;
+  --secondary: #0c5c44;
+  --dark: #e7e7e7;
   --background: #ffffff;
 
 }
@@ -51,7 +52,7 @@ footer {
 
 h1 {
   margin-bottom: 1.2em;
-  color: var(--primary);
+  color: var(--primary-darken);
   font-size: 1.8rem;
 }
 

@@ -18,6 +18,16 @@
   <form action="/albums/new/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
     <label for="image">Add image to album</label>
     <input type="file" name="image" id="image">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name"/>
+    <label for="description">Description</label>
+    <textarea name="description" id="description"></textarea>
+    <label for="alt">Alt text</label>
+    <input type="text" id="alt" name="alt">
+    <label for="location">Location</label>
+    <input type="text" id="location" name="location">
+    <label for="author">Photographer</label>
+    <input type="text" id="author" name="author">
     <button type="submit">Add</button>
   </form>
   <form action="/albums/new/upload?id=<%= album.id %>&userId=<%= userId %>" method="post">

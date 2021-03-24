@@ -1,23 +1,28 @@
 <%- include('../../partials/head.ejs'); %>
 <%- include('../../partials/header.ejs'); %>
 
-<h1>Order photos</h1>
-
-<% album.photos.sort((a, b) => a.order - b.order).forEach((photo, i) => { %>
-  <section class="order">
-    <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
-    <% if(i !== 0) { %>
-    <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
-      <button type="submit">Move up</button>
-    </form>
-    <% } %>
-    <% if(i !== album.photos.length - 1) { %>
-    <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
-      <button type="submit">Move down</button>
-    </form>
-    <% } %>
-  </section>
-<% }); %>
-<a href="/albums?userId=<%= userId %>">Save album</a>
+<section class="order">
+  <h1>Order photos</h1>
+  
+  <% album.photos.sort((a, b) => a.order - b.order).forEach((photo, i) => { %>
+    <section class="image">
+      <img src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt ? photo.alt : '' %>"/>
+      <% if (photo.name) { %>
+      <p class="name"><%= photo.name %></p>
+      <% } %>
+      <% if(i !== 0) { %>
+      <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
+        <button type="submit">Move up</button>
+      </form>
+      <% } %>
+      <% if(i !== album.photos.length - 1) { %>
+      <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
+        <button type="submit">Move down</button>
+      </form>
+      <% } %>
+    </section>
+  <% }); %>
+  <a href="/albums?userId=<%= userId %>">Save album</a>
+</section>
 
 <%- include('../../partials/footer.ejs'); %>

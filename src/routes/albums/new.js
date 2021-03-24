@@ -23,7 +23,8 @@ router.post('/img', upload.single('image'), async (req, res) => {
     id: shortid.generate(),
     order: order + 1,
     base64,
-    alt: req.body.altundefined,
+    name: req.body.name,
+    alt: req.body.alt,
     description: req.body.description,
     author: req.body.author,
     location: req.body.location
