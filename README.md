@@ -157,10 +157,10 @@ The goal of this project is to build a fully progressive enhanced website that w
 
 ## TODO from 24-03
 - [x] Add metadata to photos
-- [ ] Edit photo album
-  - [ ] Edit order
-  - [ ] Upload new photos
-  - [ ] Delete photo
+- [x] Edit photo album
+  - [x] Edit order
+  - [x] Upload new photos
+  - [x] Delete photo
 - [x] Delete album
 - [ ] Edit photo metadata
 - [ ] Preview album in carroussel
