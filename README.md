@@ -162,5 +162,6 @@ The goal of this project is to build a fully progressive enhanced website that w
   - [ ] Upload new photos
   - [ ] Delete photo
 - [x] Delete album
+- [ ] Edit photo metadata
 - [ ] Preview album in carroussel
 - [ ] Preview album in slideshow
