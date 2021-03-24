@@ -5,7 +5,7 @@
   <div class="top">
     <h1>Your albums</h1>
     <% if(albums && albums.length > 0) { %>
-    <form action="/albums/new?userId=<%= userId %>" method="post">
+    <form action="/albums/new/create?userId=<%= userId %>" method="post">
       <button type="submit">New album</button>
     </form>
     <% } %>
@@ -19,7 +19,7 @@
   </section>
   <% } else { %>
   <% albums.forEach(album => { %>
-  <section>
+  <section class="album">
     <a href="/albums/<%= album.id %>?userId=<%= userId %>">
       <h2><%= album.name %></h2>
     </a>

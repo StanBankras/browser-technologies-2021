@@ -112,6 +112,9 @@ textarea {
 }
 
 #overview {
+  .album {
+    margin-bottom: 2rem;
+  }
   .thumbnails {
     margin-top: 1rem;
     img {
@@ -160,6 +163,14 @@ textarea {
     margin-top: 1rem;
     li {
       margin-bottom: 0.5rem;
+    }
+  }
+  .controls {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    display: flex;
+    form {
+      margin-right: 1rem;
     }
   }
 }

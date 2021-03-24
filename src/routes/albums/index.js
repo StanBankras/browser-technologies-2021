@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { editAlbum, updateAlbum } from '../../controllers/album';
 
 import { isMongoId } from '../../modules/utils';
 import Album from '../../schemas/Album';
@@ -8,6 +9,7 @@ import User from '../../schemas/User';
 const router = express.Router();
 
 router
+  .post('/:step', async (req, res) => updateAlbum(req, res, `/albums/${req.params.step}?userId=%USER_ID%&id=%ALBUM_ID%`, req.params.step))
   .post('/:albumId/delete', async (req, res) => {
     const user = await User.findById(req.query.userId);
     user.albums = user.albums.filter(a => a.id !== req.params.albumId);
@@ -15,6 +17,7 @@ router
 
     res.redirect(`/albums?userId=${req.query.userId}`)
   })
+  .get('/:id/:step', (req, res) => editAlbum(req, res, 'albums/%STEP%'))
 
   .post('/:albumId/:imgId/delete', async (req, res) => {
     const albumId = req.params.albumId;

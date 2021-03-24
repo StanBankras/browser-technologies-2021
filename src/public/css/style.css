@@ -119,6 +119,10 @@ textarea {
   margin-bottom: 0;
 }
 
+#overview .album {
+  margin-bottom: 2rem;
+}
+
 #overview .thumbnails {
   margin-top: 1rem;
 }
@@ -184,6 +188,18 @@ textarea {
 
 .album ul li {
   margin-bottom: 0.5rem;
+}
+
+.album .controls {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.album .controls form {
+  margin-right: 1rem;
 }
 
 .album-details form {

@@ -3,7 +3,7 @@ import User from "../schemas/User";
 
 export async function modifiyImageOrder(req, res, redirectUrl) {
   const albumId = req.params.albumId;
-  const userId = req.query.userId;
+  const userId = req.query.userId || req.body.userId;
   const imgId = req.params.imgId;
   const user = await User.findById(userId);
   const album = user.albums.find(a => a.id === albumId);
@@ -39,8 +39,8 @@ export async function editAlbum(req, res, redirectUrl) {
     return res.redirect('/');
   }
 
-  const user = await User.findById(req.query.userId);
-  const album = user.albums.find(a => a.id === req.query.id);
+  const user = await User.findById(req.query.userId || req.body.userId);
+  const album = user.albums.find(a => a.id === (req.query.id || req.params.id));
   const url = redirectUrl.replace('%STEP%', step);
 
   res.render(url, { pageTitle: `${step}: ${album.name}`, album, userId: user._id });
@@ -51,7 +51,8 @@ export async function updateAlbum(req, res, redirectUrl, type) {
     return res.redirect('/');
   }
 
-  const user = await User.findById(req.query.userId);
+  const userId = req.query.userId || req.body.userId;
+  const user = await User.findById(userId);
   const album = user.albums.find(a => a.id === req.query.id);
   const url = redirectUrl.replace('%ALBUM_ID%', album.id).replace('%USER_ID%', req.query.userId);
 

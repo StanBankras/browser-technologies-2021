@@ -13,12 +13,12 @@ router
   .post('/img', upload.single('image'), (req, res) => uploadImage(req, res, '/albums/new/upload?id=%ALBUM_ID%&userId=%USER_ID%'))
   .post('/:albumId/:imgId/delete', (req, res) => deleteImage(req, res, '/albums/new/upload?id=%ALBUM_ID%&userId=%USER_ID%'))
   .post('/:albumId/:imgId/order/:direction', (req, res) => modifiyImageOrder(req, res, '/albums/new/sort?id=%ALBUM_ID%&userId=%USER_ID%'))
-  .post('/:step', async (req, res) => updateAlbum(req, res, `/albums/new/${req.params.step === 'details' ? 'upload' : 'sort'}?userId=%USER_ID%&id=%ALBUM_ID%`, req.params.step))
-  .post('/', async (req, res) => {
+  .post('/create', async (req, res) => {
     if(!req.query.userId || !isMongoId(req.query.userId)) {
       return res.redirect('/');
     }
-
+    
+    const user = await User.findById(req.query.userId);
     const album = {
       id: shortid.generate(),
       name: req.body.name || '',
@@ -31,7 +31,8 @@ router
 
     res.redirect(`/albums/new/details?userId=${req.query.userId}&id=${album.id}`);
   })
-  .get('/:step', (req, res) => editAlbum(req, res, 'albums/new/%STEP%'));
+  .post('/:step', async (req, res) => updateAlbum(req, res, `/albums/new/${req.params.step === 'details' ? 'upload' : 'sort'}?userId=%USER_ID%&id=%ALBUM_ID%`, req.params.step))
+  .get('/:step', (req, res) => editAlbum(req, res, 'albums/%STEP%'));
 
 export default router;
 

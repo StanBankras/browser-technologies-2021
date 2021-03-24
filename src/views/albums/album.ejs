@@ -8,6 +8,20 @@
       <button type="submit">Delete</button>
     </form>
   </div>
+  <div class="controls">
+    <form action="/albums/<%= album.id %>/details" method="get">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <button type="submit">Edit details</button>
+    </form>
+    <form action="/albums/<%= album.id %>/upload" method="get">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <button type="submit">Add or remove images</button>
+    </form>
+    <form action="/albums/<%= album.id %>/sort" method="get">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <button type="submit">Change image order</button>
+    </form>
+  </div>
   <section class="images">
     <% album.photos.sort((a, b) => a.order - b.order).slice(0, 3).forEach(photo => { %>
     <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
