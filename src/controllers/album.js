@@ -43,7 +43,7 @@ export async function editAlbum(req, res, redirectUrl) {
   const album = user.albums.find(a => a.id === (req.query.id || req.params.id));
   const url = redirectUrl.replace('%STEP%', step);
 
-  res.render(url, { pageTitle: `${step}: ${album.name}`, album, userId: user._id });
+  res.render(url, { pageTitle: `${step}: ${album.name}`, album, userId: user._id, error: req.query.error ? req.query.error : false });
 }
 
 export async function updateAlbum(req, res, redirectUrl, type) {
@@ -58,6 +58,7 @@ export async function updateAlbum(req, res, redirectUrl, type) {
 
   if(type === 'details') {
     const album = user.albums.find(a => a.id === req.query.id);
+    if(!req.body.name) return res.redirect(url.replace('upload', 'details') + '&error=name');
     album.name = req.body.name;
     album.description = req.body.description;
     await user.save();

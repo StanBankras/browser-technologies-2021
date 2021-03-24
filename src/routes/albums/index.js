@@ -43,6 +43,9 @@ router
 
     const user = await User.findById(req.query.userId);
     if(user) {
+      user.albums = user.albums.filter(a => a.name !== '' && a.photos.length !== 0);
+      await user.save();
+      
       res.render('albums/index', { pageTitle: 'Albums', albums: user.albums, userId: user._id });
     } else {
       res.redirect('/');

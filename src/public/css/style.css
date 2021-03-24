@@ -12,6 +12,7 @@
   --secondary: #0c5c44;
   --dark: #e7e7e7;
   --background: #ffffff;
+  --error: red;
 }
 
 body {
@@ -97,6 +98,11 @@ textarea {
 
 .order img {
   max-height: 200px;
+}
+
+.error {
+  color: var(--error);
+  margin: 0.5rem 0 2rem 0;
 }
 
 .top {
