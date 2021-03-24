@@ -6,12 +6,12 @@
   
   <form action="/albums/new/details?id=<%= album.id %>&userId=<%= userId %>" method="post">
     <label for="name">Album name</label>
-    <input type="text" name="name" id="name">
+    <input type="text" name="name" id="name" value="<%= album.name %>">
     <% if(error && error === 'name') { %>
     <p class="error">Please enter a name for the album.</p>
     <% } %>
     <label for="description">Album description</label>
-    <textarea name="description" id="description"></textarea>
+    <textarea name="description" id="description" value="<%= album.description %>"></textarea>
     <button type="submit">Add photos to album</button>
   </form>
 
