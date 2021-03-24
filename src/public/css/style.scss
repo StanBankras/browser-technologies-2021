@@ -21,6 +21,15 @@ header {
   background-color: var(--secondary);
   color: white;
   padding: 2rem 0;
+  nav {
+    ul {
+      list-style: none;
+      a {
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 main {
@@ -68,6 +77,17 @@ button {
   }
 }
 
+input, textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--dark);
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
 .order {
   img {
     max-height: 200px;
@@ -104,5 +124,31 @@ button {
   }
   img {
     max-height: 200px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+  }
+}
+
+.album {
+  .description {
+    margin-bottom: 2rem;
+  }
+  .images {
+    display: flex;
+    flex-wrap: wrap;
+    img {
+      max-height: 200px;
+    }
+  }
+}
+
+.album-details {
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
   }
 }

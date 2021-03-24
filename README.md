@@ -154,3 +154,13 @@ The goal of this project is to build a fully progressive enhanced website that w
 
 **Web technology I will research**
 * [MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API)
+
+## TODO from 24-03
+- [ ] Add metadata to photos
+- [ ] Edit photo album
+  - [ ] Edit order
+  - [ ] Upload new photos
+  - [ ] Delete photo
+- [x] Delete album
+- [ ] Preview album in carroussel
+- [ ] Preview album in slideshow

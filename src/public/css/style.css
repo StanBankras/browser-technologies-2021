@@ -23,6 +23,15 @@ header {
   padding: 2rem 0;
 }
 
+header nav ul {
+  list-style: none;
+}
+
+header nav ul a {
+  color: white;
+  font-weight: bold;
+}
+
 main {
   min-height: 70vh;
   background-color: var(--background);
@@ -70,6 +79,17 @@ button:hover {
   background-color: var(--primary-lighten);
 }
 
+input, textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--dark);
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
 .order img {
   max-height: 200px;
 }
@@ -115,5 +135,43 @@ button:hover {
 
 .upload img {
   max-height: 200px;
+}
+
+.upload form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 40rem;
+}
+
+.album .description {
+  margin-bottom: 2rem;
+}
+
+.album .images {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.album .images img {
+  max-height: 200px;
+}
+
+.album-details form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 40rem;
 }
 /*# sourceMappingURL=style.css.map */
