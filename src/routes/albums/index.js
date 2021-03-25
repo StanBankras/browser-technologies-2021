@@ -46,7 +46,7 @@ router
   .get('/:id', async (req, res) => {
     const user = await User.findById(req.query.userId);
     const album = user.albums.find(a => a.id === req.params.id);
-    res.render('albums/album', { pageTitle: album.name, album, userId: req.query.userId });
+    res.render('albums/album', { pageTitle: album.name || 'Photo album', album, userId: req.query.userId });
   });
 
 export default router;
