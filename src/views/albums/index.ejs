@@ -13,7 +13,7 @@
   <% if(!albums || albums.length === 0) { %>
   <section class="first-use">
     <h2>You have no albums yet.</h2>
-    <form action="/albums/new?userId=<%= userId %>" method="post">
+    <form action="/albums/new/create?userId=<%= userId %>" method="post">
       <button type="submit">Create your first album</button>
     </form>
   </section>

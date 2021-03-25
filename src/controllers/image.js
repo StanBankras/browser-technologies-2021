@@ -14,7 +14,7 @@ export async function uploadImage(req, res, redirectUrl) {
   if(!albumId || !userId || !user || !album || !req.file) {
     return res.redirect(url);
   }
-
+  order
   const base64 = getBase64FromPath(req.file.path);
   const photo = {
     id: shortid.generate(),
