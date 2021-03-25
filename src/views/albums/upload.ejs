@@ -1,6 +1,12 @@
 <%- include('../partials/head.ejs'); %>
 <%- include('../partials/header.ejs'); %>
 
+  <% if(create) { %>
+  <section class="steps">
+    Steps
+  </section>
+  <% } %>
+
 <section class="upload">
   <h1>Upload photos</h1>
   
@@ -8,14 +14,24 @@
     <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
     <div>
       <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
-      <form action="/albums/new/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
+  
+      <% if(create) { %>
+      <form action="/albums/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
+      <% } else { %>
+      <form action="/albums/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
+      <% } %>
         <button type="submit">Delete</button>
       </form>
     </div>
     <% }); %>
   </section>
   
+  
+  <% if(create) { %>
   <form action="/albums/new/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
+  <% } else { %>
+  <form action="/albums/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
+  <% } %>
     <label for="image">Add image to album</label>
     <input type="file" name="image" id="image">
     <label for="name">Name</label>
@@ -30,8 +46,13 @@
     <input type="text" id="author" name="author">
     <button type="submit">Add</button>
   </form>
+
+  <% if(create) { %>
   <form action="/albums/new/upload?id=<%= album.id %>&userId=<%= userId %>" method="post">
-    <button type="submit">Step 3</button>
+  <% } else { %>
+  <form action="/albums/upload?id=<%= album.id %>&userId=<%= userId %>" method="post">
+  <% } %>
+    <button type="submit"><%= create ? 'Continue to order images' : 'Save images' %></button>
   </form>
 </section>
 

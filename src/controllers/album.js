@@ -33,7 +33,7 @@ export async function modifiyImageOrder(req, res, redirectUrl) {
   res.redirect(url);
 }
 
-export async function editAlbum(req, res, redirectUrl) {
+export async function editAlbum(req, res, redirectUrl, create) {
   const step = req.params.step;
   if(!['details', 'upload', 'sort'].includes(step)) {
     return res.redirect('/');
@@ -43,7 +43,12 @@ export async function editAlbum(req, res, redirectUrl) {
   const album = user.albums.find(a => a.id === (req.query.id || req.params.id));
   const url = redirectUrl.replace('%STEP%', step);
 
-  res.render(url, { pageTitle: `${step}: ${album.name}`, album, userId: user._id, error: req.query.error ? req.query.error : false });
+  res.render(url, { 
+    pageTitle: `${step}: ${album.name}`,
+    album,
+    userId: user._id, error: req.query.error ? req.query.error : false,
+    create 
+  });
 }
 
 export async function updateAlbum(req, res, redirectUrl, type) {

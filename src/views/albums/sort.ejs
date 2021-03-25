@@ -10,19 +10,33 @@
       <% if (photo.name) { %>
       <p class="name"><%= photo.name %></p>
       <% } %>
-      <% if(i !== 0) { %>
+    <% if(i !== 0) { %>
+      <% if(create) { %>
       <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
+      <% } else { %>
+      <form action="/albums/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
+      <% } %>
         <button type="submit">Move up</button>
       </form>
-      <% } %>
-      <% if(i !== album.photos.length - 1) { %>
+    <% } %>
+    <% if(i !== album.photos.length - 1) { %>
+      <% if(create) { %>
       <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
+      <% } else { %>
+      <form action="/albums/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
+      <% } %>
         <button type="submit">Move down</button>
       </form>
-      <% } %>
+    <% } %>
     </section>
   <% }); %>
-  <a href="/albums?userId=<%= userId %>">Save album</a>
+  <% if(create) { %>
+  <a href="/albums?userId=<%= userId %>">
+  <% } else { %>
+  <a href="/albums/<%= album.id %>?userId=<%= userId %>">
+  <% } %>
+    <button><%= create ? 'Save album' : 'Save image order' %></button>
+  </a>
 </section>
 
 <%- include('../partials/footer.ejs'); %>

@@ -32,7 +32,7 @@ router
     res.redirect(`/albums/new/details?userId=${req.query.userId}&id=${album.id}`);
   })
   .post('/:step', async (req, res) => updateAlbum(req, res, `/albums/new/${req.params.step === 'details' ? 'upload' : 'sort'}?userId=%USER_ID%&id=%ALBUM_ID%`, req.params.step))
-  .get('/:step', (req, res) => editAlbum(req, res, 'albums/%STEP%'));
+  .get('/:step', (req, res) => editAlbum(req, res, 'albums/%STEP%', 'test'));
 
 export default router;
 

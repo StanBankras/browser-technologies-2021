@@ -1,15 +1,20 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { editAlbum, updateAlbum } from '../../controllers/album';
+import { editAlbum, modifiyImageOrder, updateAlbum } from '../../controllers/album';
+import { deleteImage, uploadImage } from '../../controllers/image';
 
 import { isMongoId } from '../../modules/utils';
 import Album from '../../schemas/Album';
 import User from '../../schemas/User';
+import { upload } from '../../modules/multer';
 
 const router = express.Router();
 
 router
-  .post('/:step', async (req, res) => updateAlbum(req, res, `/albums/${req.params.step}?userId=%USER_ID%&id=%ALBUM_ID%`, req.params.step))
+  .post('/img', upload.single('image'), (req, res) => uploadImage(req, res, '/albums/%ALBUM_ID%/upload?userId=%USER_ID%'))
+  .post('/:step', (req, res) => updateAlbum(req, res, `/albums/%ALBUM_ID%?userId=%USER_ID%`, req.params.step))
+  .post('/:albumId/:imgId/delete', (req, res) => deleteImage(req, res, '/albums/%ALBUM_ID%/upload/?userId=%USER_ID%'))
+  .post('/:albumId/:imgId/order/:direction', (req, res) => modifiyImageOrder(req, res, '/albums/%ALBUM_ID%/sort?userId=%USER_ID%'))
   .post('/:albumId/delete', async (req, res) => {
     const user = await User.findById(req.query.userId);
     user.albums = user.albums.filter(a => a.id !== req.params.albumId);
@@ -17,23 +22,9 @@ router
 
     res.redirect(`/albums?userId=${req.query.userId}`)
   })
-  .get('/:id/:step', (req, res) => editAlbum(req, res, 'albums/%STEP%'))
-
-  .post('/:albumId/:imgId/delete', async (req, res) => {
-    const albumId = req.params.albumId;
-    const userId = req.query.userId;
-    const imgId = req.params.imgUd;
-    const user = await User.findById(userId);
-    const album = user.albums.find(a => a.id === albumId);
-
-    if(!user || !album) {
-      return res.redirect(`/albums?id=${albumId}`);
-    }
-
-    album.photos = albums.photos.filter(p => p.id !== imgId);
-    await user.save();
-
-    res.redirect(`/albums?id=${albumId}`);
+  .get('/:id/:step', (req, res, next) => {
+    if(req.params.id === 'new') return next();
+    editAlbum(req, res, 'albums/%STEP%')
   })
 
   .get('/', async (req, res) => {

@@ -1,10 +1,20 @@
 <%- include('../partials/head.ejs'); %>
 <%- include('../partials/header.ejs'); %>
 
+<% if(create) { %>
+<section class="steps">
+  Steps
+</section>
+<% } %>
+
 <section class="album-details">
   <h1>Album details</h1>
   
+  <% if(create) { %>
   <form action="/albums/new/details?id=<%= album.id %>&userId=<%= userId %>" method="post">
+  <% } else { %>
+  <form action="/albums/details?id=<%= album.id %>&userId=<%= userId %>" method="post">
+  <% } %>
     <label for="name">Album name</label>
     <input type="text" name="name" id="name" value="<%= album.name %>">
     <% if(error && error === 'name') { %>
@@ -12,7 +22,7 @@
     <% } %>
     <label for="description">Album description</label>
     <textarea name="description" id="description" value="<%= album.description %>"></textarea>
-    <button type="submit">Add photos to album</button>
+    <button type="submit"><%= create ? 'Add photos to album' : 'Save details' %></button>
   </form>
 
 </section>
