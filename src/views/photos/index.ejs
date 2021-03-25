@@ -3,9 +3,11 @@
 
 <section class="photos">
   <h1>Your photos</h1>
-  <% photos.forEach(base64 => { %>
-  <img src="data:image/jpeg;base64,<%= base64 %>"/>
-  <% }); %>
+  <div class="wrapper">
+    <% photos.forEach(photo => { %>
+    <img src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>"/>
+    <% }); %>
+  </div>
 </section>
 
 <%- include('../partials/footer.ejs'); %>

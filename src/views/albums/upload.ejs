@@ -7,51 +7,50 @@
 
 <section class="upload">
   <h1>Upload photos</h1>
-  
-  <section class="images">
-    <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
-    <div>
-      <img src="data:image/jpeg;base64,<%= photo.base64 %>"/>
-  
-      <% if(create) { %>
-      <form action="/albums/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
-      <% } else { %>
-      <form action="/albums/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
-      <% } %>
-        <button type="submit">Delete</button>
-      </form>
-    </div>
-    <% }); %>
-  </section>
-  
-  
-  <% if(create) { %>
-  <form action="/albums/new/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
-  <% } else { %>
-  <form action="/albums/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
-  <% } %>
-    <label for="image">Add image to album</label>
-    <input type="file" name="image" id="image">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name"/>
-    <label for="description">Description</label>
-    <textarea name="description" id="description"></textarea>
-    <label for="alt">Alt text</label>
-    <input type="text" id="alt" name="alt">
-    <label for="location">Location</label>
-    <input type="text" id="location" name="location">
-    <label for="author">Photographer</label>
-    <input type="text" id="author" name="author">
-    <button type="submit">Add</button>
-  </form>
 
+  <div class="upload-wrapper">  
+    <% if(create) { %>
+    <form action="/albums/new/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
+    <% } else { %>
+    <form action="/albums/img?albumId=<%= album.id %>&userId=<%= userId %>" method="post" enctype="multipart/form-data">
+    <% } %>
+      <label for="image">Add image to album</label>
+      <input type="file" name="image" id="image">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name"/>
+      <label for="description">Description</label>
+      <textarea name="description" id="description"></textarea>
+      <label for="alt">Alt text</label>
+      <input type="text" id="alt" name="alt">
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location">
+      <label for="author">Photographer</label>
+      <input type="text" id="author" name="author">
+      <button type="submit">Add</button>
+    </form>
+    
+    <section class="images">
+      <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
+      <div>
+        <img src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>"/>
+    
+        <% if(create) { %>
+        <form action="/albums/new/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
+        <% } else { %>
+        <form action="/albums/<%= album.id %>/<%= photo.id %>/delete?userId=<%= userId %>" method="post">
+        <% } %>
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+      <% }); %>
+    </section>
+  </div>  
+  
   <% if(create) { %>
-  <form action="/albums/new/upload?id=<%= album.id %>&userId=<%= userId %>" method="post">
+  <a class="button" href="/albums/new/sort?id=<%= album.id %>&userId=<%= userId %>">Continue to order images</a>
   <% } else { %>
-  <form action="/albums/upload?id=<%= album.id %>&userId=<%= userId %>" method="post">
+  <a class="button" href="/albums/<%= album.id %>?userId=<%= userId %>">Save images</a>
   <% } %>
-    <button type="submit"><%= create ? 'Continue to order images' : 'Save images' %></button>
-  </form>
 </section>
 
 <%- include('../partials/footer.ejs'); %>

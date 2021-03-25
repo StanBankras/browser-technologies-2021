@@ -7,7 +7,7 @@
 
 :root {
   --primary: #09806a;
-  --primary-darken: #09806a;
+  --primary-darken: #025a4a;
   --primary-lighten: #1fb196;
   --secondary: #0c5c44;
   --dark: #e7e7e7;
@@ -76,7 +76,8 @@ a {
   color: #867a73;
 }
 
-button {
+button, .button {
+  text-decoration: none;
   padding: 0.5rem 1rem;
   border: 0;
   background-color: var(--primary);
@@ -88,7 +89,7 @@ button {
   transition: .3s;
 }
 
-button:hover {
+button:hover, .button:hover {
   background-color: var(--primary-lighten);
 }
 
@@ -153,6 +154,11 @@ textarea {
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.upload .images img {
+  width: 100%;
 }
 
 .upload img {
@@ -168,6 +174,15 @@ textarea {
       -ms-flex-direction: column;
           flex-direction: column;
   max-width: 40rem;
+}
+
+.upload form button {
+  max-width: 100px;
+}
+
+.upload .button {
+  display: inline-block;
+  margin-top: 2rem;
 }
 
 .album .description {
@@ -228,6 +243,18 @@ textarea {
 
 .steps {
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.steps > ::before {
+  content: '';
+  width: 100%;
+  height: 10px;
+  background-color: #ececec;
+  position: absolute;
+  top: 20px;
+  z-index: -1;
 }
 
 .steps ul {
@@ -238,6 +265,10 @@ textarea {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.steps ul li {
+  background-color: white;
 }
 
 .steps ul li a {
@@ -279,7 +310,83 @@ textarea {
   color: white;
 }
 
+.steps ul li a.finished .number {
+  background-color: var(--primary-darken);
+  border-color: var(--primary-darken);
+  color: white;
+}
+
+.steps ul li a.disabled .number {
+  background-color: var(--dark);
+  border-color: var(--dark);
+  color: #2c2c2c;
+}
+
 .steps ul li a p {
   font-weight: bold;
+}
+
+.breadcrumbs {
+  margin-bottom: 2rem;
+}
+
+.breadcrumbs ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.breadcrumbs ul li {
+  margin-right: 2rem;
+}
+
+.breadcrumbs ul li ::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-right: 10px solid red;
+  border-top: 10px solid transparent;
+  border-left: 0 dotted;
+  border-bottom: 10px solid transparent;
+  vertical-align: middle;
+  margin-left: 2px;
+  content: '';
+}
+
+.upload-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+}
+
+.photos .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.photos .wrapper img {
+  height: 150px;
+  line-height: 150px;
+  background: #EC985A;
+  color: white;
+  margin: 0 1rem 1rem 0;
+  text-align: center;
+  font-family: system-ui;
+  font-weight: 900;
+  font-size: 2rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
 }
 /*# sourceMappingURL=style.css.map */

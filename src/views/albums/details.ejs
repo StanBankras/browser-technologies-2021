@@ -3,6 +3,17 @@
 
 <% if(create) { %>
 <%- include('../partials/steps.ejs') %>
+<% } else { %>
+<nav class="breadcrumbs">
+  <ul>
+    <li>
+      <a href="/albums/<%= album.id %>?userId=<%= userId %>">Album: <%= album.name %></a>
+    </li>
+    <li>
+      <a>Details</a>
+    </li>
+  </ul>
+</nav>
 <% } %>
 
 <section class="album-details">
@@ -14,11 +25,11 @@
   <form action="/albums/details?id=<%= album.id %>&userId=<%= userId %>" method="post">
   <% } %>
     <label for="name">Album name</label>
-    <input type="text" name="name" id="name" value="<%= album.name %>">
+    <input type="text" name="name" id="name" value="<%= album.name %>" required>
     <% if(error && error === 'name') { %>
     <p class="error">Please enter a name for the album.</p>
     <% } %>
-    <label for="description">Album description</label>
+    <label for="description">Album description - optional</label>
     <textarea name="description" id="description" value="<%= album.description %>"></textarea>
     <button type="submit"><%= create ? 'Add photos to album' : 'Save details' %></button>
   </form>

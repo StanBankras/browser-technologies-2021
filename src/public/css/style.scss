@@ -6,7 +6,7 @@
 
 :root {
   --primary: #09806a;
-  --primary-darken: #09806a;
+  --primary-darken: #025a4a;
   --primary-lighten: #1fb196;
   --secondary: #0c5c44;
   --dark: #e7e7e7;
@@ -72,7 +72,8 @@ a {
   color: #867a73;
 }
 
-button {
+button, .button {
+  text-decoration: none;
   padding: 0.5rem 1rem;
   border: 0;
   background-color: var(--primary);
@@ -139,6 +140,10 @@ textarea {
   .images {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    img {
+      width: 100%;
+    }
   }
   img {
     max-height: 200px;
@@ -147,6 +152,13 @@ textarea {
     display: flex;
     flex-direction: column;
     max-width: 40rem;
+    button {
+      max-width: 100px;
+    }
+  }
+  .button {
+    display: inline-block;
+    margin-top: 2rem;
   }
 }
 
@@ -194,11 +206,23 @@ textarea {
 
 .steps {
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+  > ::before {
+    content: '';
+    width: 100%;
+    height: 10px;
+    background-color: rgb(236, 236, 236);
+    position: absolute;
+    top: 20px;
+    z-index: -1;
+  }
   ul {
     list-style: none;
     display: flex;
     justify-content: space-between;
     li {
+      background-color: white;
       a {
         text-decoration: none;
         display: flex;
@@ -222,10 +246,72 @@ textarea {
             color: white;
           }
         }
+        &.finished {
+          .number {
+            background-color: var(--primary-darken);
+            border-color: var(--primary-darken);
+            color: white;
+          }
+        }
+        &.disabled {
+          .number {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            color: rgb(44, 44, 44);
+          }
+        }
         p {
           font-weight: bold;
         }
       }
     }
   }
+}
+
+.breadcrumbs {
+  margin-bottom: 2rem;
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    li {
+      margin-right: 2rem;
+      ::after {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-right: 10px solid red;
+        border-top: 10px solid transparent;
+        border-left: 0 dotted;
+        border-bottom: 10px solid transparent;
+      
+        vertical-align: middle;
+        margin-left: 2px;
+        content:'';
+      }
+    }
+  }
+}
+
+.upload-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.photos .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  img {
+    height: 150px;
+    line-height: 150px;
+    background: #EC985A;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
+    flex: 1 0 auto;
+  } 
 }

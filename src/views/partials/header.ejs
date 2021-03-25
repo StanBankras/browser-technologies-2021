@@ -4,10 +4,10 @@
       <ul>
         <% if (typeof(userId) !== 'undefined') { %>
         <li>
-          <a href="/photos?userId=<%= userId %>">All photos</a>
+          <a href="/albums?userId=<%= userId %>">Albums</a>
         </li>
         <li>
-          <a href="/albums?userId=<%= userId %>">Albums</a>
+          <a href="/photos?userId=<%= userId %>">All photos</a>
         </li>
         <% } %>
       </ul>

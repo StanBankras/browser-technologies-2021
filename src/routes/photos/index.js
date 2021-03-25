@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 
   const user = await User.findById(userId);
-  let photos = user.albums.map(a => a.photos.map(p => p.base64)).flat();
+  let photos = user.albums.map(a => a.photos.map(p => { return { base64: p.base64, alt: p.alt }})).flat();
 
   res.render('photos', { pageTitle: 'Your photos', photos, userId })
 });
