@@ -1,6 +1,10 @@
 <%- include('../partials/head.ejs'); %>
 <%- include('../partials/header.ejs'); %>
 
+<% if(create) { %>
+<%- include('../partials/steps.ejs') %>
+<% } %>
+
 <section class="order">
   <h1>Order photos</h1>
   

@@ -225,4 +225,61 @@ textarea {
           flex-direction: column;
   max-width: 40rem;
 }
+
+.steps {
+  margin-bottom: 3rem;
+}
+
+.steps ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.steps ul li a {
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.steps ul li a .number {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  border: 4px solid var(--primary);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.steps ul li a.active .number, .steps ul li a:hover .number {
+  background-color: var(--primary);
+  color: white;
+}
+
+.steps ul li a p {
+  font-weight: bold;
+}
 /*# sourceMappingURL=style.css.map */

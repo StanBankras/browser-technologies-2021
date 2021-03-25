@@ -1,0 +1,22 @@
+<section class="steps">
+  <ul>
+    <li>
+      <a href="/albums/new/details?id=<%= album.id %>&userId=<%= userId %>" class="<%= step == 'details' ? 'active' : '' %>">
+        <div class="number">1</div>
+        <p>Details</p>
+      </a>
+    </li>
+    <li>
+      <a href="/albums/new/upload?id=<%= album.id %>&userId=<%= userId %>" class="<%= step === 'upload' ? 'active' : '' %>">
+        <div class="number">2</div>
+        <p>Details</p>
+      </a>
+    </li>
+    <li>
+      <a href="/albums/new/sort?id=<%= album.id %>&userId=<%= userId %>" class="<%= step === 'sort' ? 'active' : '' %>">
+        <div class="number">3</div>
+        <p>Order</p>
+      </a>
+    </li>
+  </ul>
+</section>

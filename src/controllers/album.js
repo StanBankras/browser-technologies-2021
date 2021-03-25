@@ -47,7 +47,8 @@ export async function editAlbum(req, res, redirectUrl, create) {
     pageTitle: `${step}: ${album.name}`,
     album,
     userId: user._id, error: req.query.error ? req.query.error : false,
-    create 
+    create,
+    step
   });
 }
 
