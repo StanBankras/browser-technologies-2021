@@ -54,6 +54,12 @@ footer {
   margin: 0 auto;
 }
 
+.visuallyhidden {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 h1 {
   margin-bottom: 1.2em;
   color: var(--primary-darken);
@@ -73,6 +79,7 @@ a {
 }
 
 button, .button {
+  display: block;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border: 0;
@@ -82,8 +89,18 @@ button, .button {
   margin: 1rem 0;
   cursor: pointer;
   transition: .3s;
+  font-family: serif;
+  font-size: 15px;
   &:hover {
     background-color: var(--primary-lighten);
+  }
+  &.error {
+    background-color: transparent;
+    border: 3px solid var(--error);
+    &:hover {
+      background-color: red;
+      color: white;
+    }
   }
 }
 
@@ -101,6 +118,11 @@ textarea {
 .order {
   img {
     max-height: 200px;
+  }
+  .images {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
   }
 }
 
@@ -133,6 +155,18 @@ textarea {
   }
   .first-use {
     margin-top: 2rem;
+  }
+}
+
+.album {
+  .images {
+    img {
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+  .button {
+    margin-right: 1rem;
   }
 }
 
@@ -318,4 +352,23 @@ textarea {
     font-size: 2rem;
     flex: 1 0 auto;
   } 
+}
+
+.draggable {
+  cursor: move;
+}
+
+.dragging {
+  cursor: grab;
+}
+
+.notification {
+  position: fixed;
+  bottom: 1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 30px;
+  background-color: var(--primary);
+  color: white;
+  left: 50%;
+  transform: translateX(-50%);
 }

@@ -10,7 +10,7 @@ export async function modifiyImageOrder(req, res, redirectUrl) {
   const photo = album.photos.find(p => p.id === imgId);
   const url = redirectUrl.replace('%ALBUM_ID%', albumId).replace('%USER_ID%', userId);
 
-  if(!albumId || !userId || !user || !imgId || !album || !photo || !['up', 'down'].includes(req.params.direction)) {
+  if(!albumId || !userId || !user || !imgId || !album || !photo) {
     return res.redirect(url);
   }
 
@@ -21,13 +21,35 @@ export async function modifiyImageOrder(req, res, redirectUrl) {
       prevPhoto.order -= 1;
       await user.save();
     }
-  } else {
+  } else if(req.params.direction === 'up') {
     const nextPhoto = album.photos.find(p => p.order === photo.order - 1);
     if(nextPhoto) {
       photo.order -= 1;
       nextPhoto.order += 1;
       await user.save();
     }
+  } else {
+    const newIndex = req.params.direction;
+    const prevIndex = photo.order;
+
+    let sortedPhotos = album.photos.sort((a, b) => a.order - b.order);
+
+    for(let i = newIndex; i < sortedPhotos.length; i++) {
+      if(!sortedPhotos[i]) return;
+      sortedPhotos[i].order += 1;
+    }
+    
+    sortedPhotos.find(p => p.id === imgId).order = newIndex;
+    
+    sortedPhotos = sortedPhotos.sort((a, b) => a.order - b.order);
+    const newPhotos = [];
+    for(let i = 0; i < sortedPhotos.length; i++) {
+      const p = sortedPhotos[i];
+      p.order = i;
+      newPhotos.push(p);
+    }
+    album.photos = newPhotos;
+    await user.save();
   }
 
   res.redirect(url);

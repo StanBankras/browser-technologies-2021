@@ -5,26 +5,17 @@
   <div class="top">
     <h1><%= album.name %></h1>  
     <form action="/albums/<%= album.id %>/delete?userId=<%= userId %>" method="post">
-      <button type="submit">Delete</button>
+      <button type="submit" class="error">Delete album</button>
     </form>
   </div>
   <div class="controls">
-    <form action="/albums/<%= album.id %>/details" method="get">
-      <input type="hidden" name="userId" value="<%= userId %>">
-      <button type="submit">Edit details</button>
-    </form>
-    <form action="/albums/<%= album.id %>/upload" method="get">
-      <input type="hidden" name="userId" value="<%= userId %>">
-      <button type="submit">Add or remove images</button>
-    </form>
-    <form action="/albums/<%= album.id %>/sort" method="get">
-      <input type="hidden" name="userId" value="<%= userId %>">
-      <button type="submit">Change image order</button>
-    </form>
+    <a href="/albums/<%= album.id %>/details?userId=<%= userId %>" class="button">Edit details</a>
+    <a href="/albums/<%= album.id %>/upload?userId=<%= userId %>" class="button">Add or remove images</a>
+    <a id="image-order" href="/albums/<%= album.id %>/sort?userId=<%= userId %>" class="button">Change image order</a>
   </div>
-  <section class="images">
-    <% album.photos.sort((a, b) => a.order - b.order).slice(0, 3).forEach(photo => { %>
-    <img src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>"/>
+  <section class="images" data-id="<%= album.id %>" data-userid="<%= userId %>">
+    <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
+    <img class="draggable" src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>" data-id="<%= photo.id %>"/>
     <% }); %>
   </section>
   <p class="description"><%= album.description %></p>

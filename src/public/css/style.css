@@ -58,6 +58,12 @@ footer {
   margin: 0 auto;
 }
 
+.visuallyhidden {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 h1 {
   margin-bottom: 1.2em;
   color: var(--primary-darken);
@@ -77,6 +83,7 @@ a {
 }
 
 button, .button {
+  display: block;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border: 0;
@@ -87,10 +94,22 @@ button, .button {
   cursor: pointer;
   -webkit-transition: .3s;
   transition: .3s;
+  font-family: serif;
+  font-size: 15px;
 }
 
 button:hover, .button:hover {
   background-color: var(--primary-lighten);
+}
+
+button.error, .button.error {
+  background-color: transparent;
+  border: 3px solid var(--error);
+}
+
+button.error:hover, .button.error:hover {
+  background-color: red;
+  color: white;
 }
 
 input, textarea {
@@ -106,6 +125,14 @@ textarea {
 
 .order img {
   max-height: 200px;
+}
+
+.order .images {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
 }
 
 .error {
@@ -147,6 +174,15 @@ textarea {
 
 #overview .first-use {
   margin-top: 2rem;
+}
+
+.album .images img {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.album .button {
+  margin-right: 1rem;
 }
 
 .upload .images {
@@ -391,5 +427,26 @@ textarea {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 auto;
           flex: 1 0 auto;
+}
+
+.draggable {
+  cursor: move;
+}
+
+.dragging {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.notification {
+  position: fixed;
+  bottom: 1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 30px;
+  background-color: var(--primary);
+  color: white;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 /*# sourceMappingURL=style.css.map */
