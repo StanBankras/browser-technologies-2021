@@ -164,3 +164,6 @@ The goal of this project is to build a fully progressive enhanced website that w
 - [ ] Edit photo metadata
 - [ ] Preview album in carroussel
 - [ ] Preview album in slideshow
+
+## Acknowledgements
+* [Drag & Drop API tutorial](https://www.youtube.com/watch?v=jfYWwQrtzzY)
