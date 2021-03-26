@@ -125,20 +125,19 @@ I am most likely going to research the [MediaStream Image Capture API](https://d
 ## Progressive enhancement idea
 The goal of this project is to build a fully progressive enhanced website that works on many different browsers, with / without javascript and with / without CSS. Here's how I technically plan to achieve these so-called layers:
 
-### 1. HTML only layer
-* Allow user to login with their previous ID (to continue with their albums)
-* If they don't have an ID, allow them to generate one
-* Through every navigation, pass this ID with requests to the server and make sure the server always sends it back in the generated HTML
-* Use form methods to communicate data to the server
+### 1. Functional
+* Allow user to login so they can continue where they left off
+* The user can upload and build their full photo album
 
-### 2. HTML & CSS layer
-* Potentially add a more neat progressive disclosure pattern to the album creation page
-* Communication/navigation through the server is the same as the first layer, as there is no javascript yet
+### 2. Usable
+* Photo dimensions can become the same width or height, so the editing and uploading process is a lot smoother and the user can see more at a glance
+* Layout can be improved so that the interface will be more easily navigated through making for a more usable experience.
+* Preview the photo albums in a neat way
 
-### 3. HTML, CSS & Javascript layer
-* Possibility to use client-side rendering to avoid page refreshes and give the user a more 'appy' experience, as calls for data are handled by Javascript.
-* If localstorage is available, the user ID is stored here and automatically given back with requests. The user won't have to fill it in anymore.
-* Use MediaStream Image Capture API if available to allow user to capture images and directly insert it into the album
+### 3. Pleasurable
+* Upload & delete images without seeing page refreshes happen: it removes some distraction and it feels like things happen more instantly.
+* Allow users to directly capture an image from inside the browser, so they can for instance build a photo album while on vaction, or digitalize an old photo book/album.
+* Automatically play albums as a slideshow
 
 ## Core functionalities
 * Create new photo album (name & description)
