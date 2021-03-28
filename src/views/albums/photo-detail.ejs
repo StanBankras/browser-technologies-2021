@@ -1,0 +1,32 @@
+<%- include('../partials/head.ejs'); %>
+<%- include('../partials/header.ejs'); %>
+
+<nav class="breadcrumbs">
+  <ul>
+    <li>
+      <a href="/albums/<%= album.id %>?userId=<%= userId %>">Album: <%= album.name %></a>
+    </li>
+    <li>
+      <a><%= image.name ? image.name : 'Unnamed photo' %></a>
+    </li>
+  </ul>
+</nav>
+
+<section class="photo-detail">
+  <h1><%= image.name ? image.name : 'Unnamed photo' %></h1>
+  <div class="wrapper">
+    <div>
+      <img src="data:image/jpeg;base64,<%= image.base64 %>" alt="<%= image.alt %>"/>
+    </div>
+    <div class="details">
+      <h3>Description</h3>
+      <p><%= image.description ? image.description : 'No description' %></p>
+      <h3>Location</h3>
+      <p><%= image.location ? image.location : 'No location' %></p>
+      <h3>Photographer</h3>
+      <p><%= image.photographer ? image.photographer : 'No photographer' %></p>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer.ejs'); %>

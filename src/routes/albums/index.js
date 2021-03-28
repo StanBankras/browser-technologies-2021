@@ -22,6 +22,14 @@ router
 
     res.redirect(`/albums?userId=${req.query.userId}`)
   })
+  .get('/:id/photos/:imgId', async (req, res) => {
+    const userId = req.query.userId;
+    const user = await User.findById(userId);
+    const album = user.albums.find(a => a.id === req.params.id);
+    const image = album.photos.find(p => p.id === req.params.imgId);
+    
+    res.render('albums/photo-detail', { image, userId, album, pageTitle: image.name ? image.name : 'Photo detail page' });
+  })
   .get('/:id/:step', (req, res, next) => {
     if(req.params.id === 'new') return next();
     editAlbum(req, res, 'albums/%STEP%')
