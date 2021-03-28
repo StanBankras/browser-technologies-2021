@@ -1,7 +1,11 @@
 const draggables = document.querySelectorAll('.draggable');
 const containers = document.querySelectorAll('.images');
 
-document.getElementById('image-order').remove();
+if('draggable' in document.createElement('div')) {
+  if(draggables.length > 0) {
+    document.querySelectorAll('.draggable form').forEach(form => form.remove());
+  }
+}
 
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', () => {
@@ -23,7 +27,6 @@ draggables.forEach(draggable => {
       newIndex = getChildNodeIndex(afterElement);
     }
     const url = `/albums/${albumId}/${imgId}/order/${newIndex}?userId=${userId}`;
-    console.log(url);
     fetch(url, {
       method: 'POST'
     }).then(() => sendNotification('success', 'Saved image order.'));

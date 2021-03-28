@@ -15,7 +15,9 @@
   </div>
   <section class="images" data-id="<%= album.id %>" data-userid="<%= userId %>">
     <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
-    <img class="draggable" src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>" data-id="<%= photo.id %>"/>
+    <div class="image">
+      <img class="draggable" src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>" data-id="<%= photo.id %>"/>
+    </div>
     <% }); %>
   </section>
   <p class="description"><%= album.description %></p>

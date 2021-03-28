@@ -21,25 +21,25 @@
   
   <div class="images" data-id="<%= album.id %>" data-userid="<%= userId %>">
     <% album.photos.sort((a, b) => a.order - b.order).forEach((photo, i) => { %>
-      <section draggable="true" class="image draggable" data-order="<%= photo.order %>">
-        <img src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt ? photo.alt : '' %>" data-id="<%= photo.id %>"/>
+      <section  class="image draggable" data-order="<%= photo.order %>">
+        <img draggable="true" src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt ? photo.alt : '' %>" data-id="<%= photo.id %>"/>
         <% if (photo.name) { %>
         <p class="name"><%= photo.name %></p>
         <% } %>
       <% if(i !== 0) { %>
         <% if(create) { %>
-        <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
+        <form class="move-up" action="/albums/new/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
         <% } else { %>
-        <form action="/albums/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
+        <form class="move-up" action="/albums/<%= album.id %>/<%= photo.id %>/order/up?userId=<%= userId %>" method="post">
         <% } %>
           <button type="submit">Move up</button>
         </form>
       <% } %>
       <% if(i !== album.photos.length - 1) { %>
         <% if(create) { %>
-        <form action="/albums/new/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
+        <form class="move-down" action="/albums/new/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
         <% } else { %>
-        <form action="/albums/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
+        <form class="move-down" action="/albums/<%= album.id %>/<%= photo.id %>/order/down?userId=<%= userId %>" method="post">
         <% } %>
           <button type="submit">Move down</button>
         </form>

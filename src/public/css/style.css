@@ -52,6 +52,10 @@ footer {
   background-color: var(--dark);
 }
 
+img {
+  max-width: 100%;
+}
+
 .container {
   max-width: 1400px;
   padding: 0 2rem;
@@ -448,5 +452,26 @@ textarea {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+}
+
+.image.draggable {
+  position: relative;
+}
+
+.image.draggable form {
+  position: absolute;
+  top: 0;
+}
+
+.image.draggable form.move-up {
+  left: 0;
+}
+
+.image.draggable form.move-down {
+  right: 0;
+}
+
+.image.draggable form button {
+  margin: 0;
 }
 /*# sourceMappingURL=style.css.map */

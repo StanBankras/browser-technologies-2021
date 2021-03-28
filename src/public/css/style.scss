@@ -48,6 +48,10 @@ footer {
   background-color: var(--dark);
 }
 
+img {
+  max-width: 100%;
+}
+
 .container {
   max-width: 1400px;
   padding: 0 2rem;
@@ -371,4 +375,21 @@ textarea {
   color: white;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.image.draggable {
+  position: relative;
+  form {
+    position: absolute;
+    top: 0;
+    &.move-up {
+      left: 0;
+    }
+    &.move-down {
+      right: 0;
+    }
+    button {
+      margin: 0;
+    }
+  }
 }
