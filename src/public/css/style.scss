@@ -127,6 +127,12 @@ textarea {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 2rem;
+    @media(max-width: 1200px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media(max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
@@ -382,14 +388,29 @@ textarea {
   form {
     position: absolute;
     top: 0;
-    &.move-up {
-      left: 0;
-    }
     &.move-down {
-      right: 0;
+      bottom: 0;
+      top: unset;
     }
     button {
       margin: 0;
+    }
+  }
+}
+
+.draggable {
+  form {
+    opacity: 0;
+    &.visible {
+      opacity: 1;
+    }
+  }
+}
+
+@media (pointer:coarse) {
+  .draggable {
+    form {
+      opacity: 1;
     }
   }
 }

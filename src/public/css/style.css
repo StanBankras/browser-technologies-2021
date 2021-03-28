@@ -139,6 +139,20 @@ textarea {
   gap: 2rem;
 }
 
+@media (max-width: 1200px) {
+  .order .images {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .order .images {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+
 .error {
   color: var(--error);
   margin: 0.5rem 0 2rem 0;
@@ -463,15 +477,26 @@ textarea {
   top: 0;
 }
 
-.image.draggable form.move-up {
-  left: 0;
-}
-
 .image.draggable form.move-down {
-  right: 0;
+  bottom: 0;
+  top: unset;
 }
 
 .image.draggable form button {
   margin: 0;
+}
+
+.draggable form {
+  opacity: 0;
+}
+
+.draggable form.visible {
+  opacity: 1;
+}
+
+@media (pointer: coarse) {
+  .draggable form {
+    opacity: 1;
+  }
 }
 /*# sourceMappingURL=style.css.map */
