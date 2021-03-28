@@ -38,10 +38,12 @@ containers.forEach(container => {
     e.preventDefault()
     const afterElement = getDragAfterElement(container, e.clientX, e.clientY)
     const draggable = document.querySelector('.dragging')
-    if (afterElement == null) {
-      container.appendChild(draggable)
+    if(afterElement === 'none') {
+      console.log('none');
+    } else if (afterElement == null) {
+      container.appendChild(draggable.parentNode)
     } else {
-      container.insertBefore(draggable, afterElement)
+      container.insertBefore(draggable.parentNode, afterElement.parentNode)
     }
   })
 })
@@ -49,13 +51,15 @@ containers.forEach(container => {
 function getDragAfterElement(container, x, y) {
   const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
 
-  return draggableElements.reduce((closest, child) => {
-    const box = child.getBoundingClientRect()
+  const afterEl = draggableElements.reduce((closest, child, i) => {
+    const box = child.getBoundingClientRect();
     const offset = x - box.left - box.width / 2
     if (offset < 0 && offset > closest.offset && y > box.top && y < box.bottom) {
-      return { offset: offset, element: child }
+      return { offset, element: child };
     } else {
-      return closest
+      return closest;
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element;
+
+  return afterEl;
 }

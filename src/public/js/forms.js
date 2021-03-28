@@ -11,16 +11,20 @@ if(orderPage) {
       for(el of child.children) {
         if(el.nodeName === 'FORM') form = el;
       }
+      
       const clone = form.cloneNode(true);
       const isUp = clone.action.includes('/up');
-      clone.action = clone.action.replace(isUp ? '/up' : '/down', isUp ? '/down': '/up');
-      clone.classList.remove(isUp ? 'move-up' : 'move-down');
-      clone.classList.add(isUp ? 'move-down' : 'move-up');
+      const curr = isUp ? 'down' : 'up';
+      const old = isUp ? 'up' : 'down';
       let button;
       for(el of clone.children) {
         if(el.nodeName === 'BUTTON') button = el;
       }
-      button.innerText = isUp ? 'Move down' : 'Move up';
+
+      clone.action = clone.action.replace(old, curr);
+      clone.classList.remove(`move-${old}`);
+      clone.classList.add(`move-${curr}`);
+      button.innerText = `Move ${curr}`;
       child.appendChild(clone);
     }
   }
