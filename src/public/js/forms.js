@@ -1,4 +1,38 @@
 const uploadForm = document.querySelector('#image-upload');
+const deleteForms = document.querySelectorAll('.delete-image');
+const changeOrderForms = [...document.querySelectorAll('form.move-up'), ...document.querySelectorAll('form.move-down')];
+const orderPage = document.querySelector('.order .images');
+
+// If on order photo page, add missing buttons so ordering can be handled by JS
+if(orderPage) {
+  for(child of orderPage.children) {
+    if(child.children.length <= 2) {
+      let form;
+      for(el of child.children) {
+        if(el.nodeName === 'FORM') form = el;
+      }
+      const clone = form.cloneNode(true);
+      const isUp = clone.action.includes('/up');
+      clone.action = clone.action.replace(isUp ? '/up' : '/down', isUp ? '/down': '/up');
+      clone.classList.remove(isUp ? 'move-up' : 'move-down');
+      clone.classList.add(isUp ? 'move-down' : 'move-up');
+      let button;
+      for(el of clone.children) {
+        if(el.nodeName === 'BUTTON') button = el;
+      }
+      button.innerText = isUp ? 'Move down' : 'Move up';
+      child.appendChild(clone);
+    }
+  }
+}
+
+if(changeOrderForms.length > 0) {
+  changeOrderForms.forEach(form => form.addEventListener('submit', e => changeImageOrder(e)));
+}
+
+if(deleteForms.length > 0) {
+  deleteForms.forEach(form => form.addEventListener('submit', e => deleteImage(e)));
+}
 
 if(uploadForm) {
   uploadForm.addEventListener('submit', async e => {
@@ -27,10 +61,6 @@ if(uploadForm) {
   });
 }
 
-const deleteForms = document.querySelectorAll('.delete-image');
-
-deleteForms.forEach(form => form.addEventListener('submit', e => deleteImage(e)));
-
 async function deleteImage(event) {
   event.preventDefault();
   const url = event.target.action;
@@ -41,3 +71,36 @@ async function deleteImage(event) {
     event.target.parentElement.remove();
   }
 }
+
+async function changeImageOrder(event) {
+  event.preventDefault();
+  const url = event.target.action;
+  const response = await fetch(event.target.action, {
+    method: 'POST'
+  });
+  if(response.status === 200) {
+    const element = event.path[1].cloneNode(true);
+    const index = getChildNodeIndex(event.path[1]);
+    const container = document.querySelector('.images');
+    getAndHandleForms(element);
+
+    if(event.target.action.includes('up')) {
+      if(index === 0) return;
+      container.insertBefore(element, event.path[1].previousSibling.previousSibling);
+    }
+    if(event.target.action.includes('down')) {
+      if(index === event.path[2].children.length - 1) return;
+      container.insertBefore(element, event.path[1].nextSibling.nextSibling.nextSibling);
+    }
+
+    event.path[1].remove();
+  }
+}
+
+function getAndHandleForms(el) {
+  let forms = [];
+  for(child of el.childNodes) {
+    if(child.nodeName === 'FORM') forms.push(child);
+  }
+  forms.forEach(form => form.addEventListener('submit', e => changeImageOrder(e)));
+} 

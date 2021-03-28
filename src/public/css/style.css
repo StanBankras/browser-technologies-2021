@@ -139,6 +139,14 @@ textarea {
   gap: 2rem;
 }
 
+.order .images .draggable:first-child .move-up {
+  display: none;
+}
+
+.order .images .draggable:last-child .move-down {
+  display: none;
+}
+
 @media (max-width: 1200px) {
   .order .images {
     -ms-grid-columns: 1fr 1fr;
@@ -494,9 +502,23 @@ textarea {
   opacity: 1;
 }
 
+#image-order {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
 @media (pointer: coarse) {
   .draggable form {
     opacity: 1;
+  }
+  #image-order {
+    opacity: 1;
+    max-height: unset;
+    max-width: unset;
+    padding: 0.5rem 1rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -59,12 +59,3 @@ function getDragAfterElement(container, x, y) {
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
-
-function getChildNodeIndex(el) {
-  let position = 0;
-  while ((el = el.previousSibling) != null) {
-    if (el.nodeType != Node.TEXT_NODE) position++;
-  }
-
-  return position;
-}

@@ -127,6 +127,18 @@ textarea {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 2rem;
+    .draggable {
+      &:first-child {
+        .move-up {
+          display: none;
+        }
+      }
+      &:last-child {
+        .move-down {
+          display: none;
+        }
+      }
+    }
     @media(max-width: 1200px) {
       grid-template-columns: 1fr 1fr;
     }
@@ -407,10 +419,24 @@ textarea {
   }
 }
 
+#image-order {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
 @media (pointer:coarse) {
   .draggable {
     form {
       opacity: 1;
     }
+  }
+  #image-order {
+    opacity: 1;
+    max-height: unset;
+    max-width: unset;
+    padding: 0.5rem 1rem;
   }
 }
