@@ -28,7 +28,7 @@ router
     const user = await User.findById(userId);
     const album = user.albums.find(a => a.id === req.params.id);
     
-    res.render('albums/carousel', { userId, album, pageTitle: album.name ? album.name : 'Album carousel' });
+    res.render('albums/carousel', { userId, album, pageTitle: 'Album carousel' });
   })
 
   .get('/:id/photos/:imgId', async (req, res) => {
