@@ -20,7 +20,7 @@ if(carousel) {
   const containerWidth = container.getBoundingClientRect().width;
   const amountOfPhotos = carousel.dataset.photos;
   let index = 0;
-  let interval;
+  let interval = '';
   let direction = 'next';
 
   nextButton.addEventListener('click', () => {
@@ -36,7 +36,7 @@ if(carousel) {
   });
 
   playButton.addEventListener('click', () => {
-    if(interval) {
+    if(interval !== '') {
       stopSlideShow();
     } else {
       playButton.innerText = 'Stop slideshow'
@@ -56,7 +56,7 @@ if(carousel) {
 
   function stopSlideShow() {
     clearInterval(interval);
-    interval = undefined;
+    interval = '';
     playButton.innerText = 'Play slideshow'
   }
 }

@@ -567,7 +567,7 @@ textarea {
 }
 
 @media (pointer: coarse) {
-  .draggable form {
+  .image form {
     opacity: 1;
   }
   #image-order {
