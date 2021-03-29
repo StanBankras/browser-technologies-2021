@@ -16,7 +16,7 @@
   <section class="images" data-id="<%= album.id %>" data-userid="<%= userId %>">
     <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>
     <div class="image">
-      <img class="draggable" src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>" data-id="<%= photo.id %>"/>
+      <img class="draggable" draggable="true" src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>" data-id="<%= photo.id %>"/>
       <a href="/albums/<%= album.id %>/photos/<%= photo.id %>?userId=<%= userId %>">View <%= photo.name ? photo.name : 'photo' %> details</a>
     </div>
     <% }); %>
@@ -41,6 +41,8 @@
     <li>The photos were taken by different photographers</li>
     <% } %>
   </ul>
+
+  <a href="/albums/<%= album.id %>/carousel?userId=<%= userId %>" class="button">View in carousel/slideshow</a>
 </section>
 
 <%- include('../partials/footer.ejs'); %>

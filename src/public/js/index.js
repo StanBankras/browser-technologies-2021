@@ -5,6 +5,10 @@ function sendNotification(type, message) {
   notification.classList.add('notification');
   notification.textContent = message;
 
+  if(type === 'error') {
+    notification.classList.add('error');
+  }
+
   body.appendChild(notification);
 
   setTimeout(() => notification.remove(), 3000);

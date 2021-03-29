@@ -1,0 +1,25 @@
+<%- include('../partials/head.ejs'); %>
+<%- include('../partials/header.ejs'); %>
+
+<nav class="breadcrumbs">
+  <ul>
+    <li>
+      <a href="/albums/<%= album.id %>?userId=<%= userId %>">Album: <%= album.name %></a>
+    </li>
+    <li>
+      <a>Carousel</a>
+    </li>
+  </ul>
+</nav>
+
+<section id="carousel" class="carousel" data-photos="<%= album.photos.length %>">
+  <div class="photos">
+    <% album.photos.forEach(photo => { %>
+    <div>
+      <img src="data:image/jpeg;base64,<%= photo.base64 %>" alt="<%= photo.alt %>">
+    </div>
+    <% }) %>
+  </div>
+</section>
+
+<%- include('../partials/footer.ejs'); %>

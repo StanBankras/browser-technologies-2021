@@ -35,15 +35,15 @@ draggables.forEach(draggable => {
 
 containers.forEach(container => {
   container.addEventListener('dragover', e => {
-    e.preventDefault()
-    const afterElement = getDragAfterElement(container, e.clientX, e.clientY)
-    const draggable = document.querySelector('.dragging')
+    e.preventDefault();
+    const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
+    const draggable = document.querySelector('.dragging');
     if(afterElement === 'none') {
       console.log('none');
     } else if (afterElement == null) {
-      container.appendChild(draggable.parentNode)
+      container.appendChild(draggable.parentNode);
     } else {
-      container.insertBefore(draggable.parentNode, afterElement.parentNode)
+      container.insertBefore(draggable.parentNode, afterElement.parentNode);
     }
   })
 })
@@ -53,7 +53,7 @@ function getDragAfterElement(container, x, y) {
 
   const afterEl = draggableElements.reduce((closest, child, i) => {
     const box = child.getBoundingClientRect();
-    const offset = x - box.left - box.width / 2
+    const offset = x - box.left - box.width / 2;
     if (offset < 0 && offset > closest.offset && y > box.top && y < box.bottom) {
       return { offset, element: child };
     } else {
