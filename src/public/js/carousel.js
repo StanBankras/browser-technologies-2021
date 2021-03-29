@@ -20,8 +20,9 @@ if(carousel) {
   const containerWidth = container.getBoundingClientRect().width;
   const amountOfPhotos = carousel.dataset.photos;
   let index = 0;
-  let interval = '';
   let direction = 'next';
+  let auto = false;
+
 
   nextButton.addEventListener('click', () => {
     if(index < amountOfPhotos - 1) index++;
@@ -36,27 +37,31 @@ if(carousel) {
   });
 
   playButton.addEventListener('click', () => {
-    if(interval !== '') {
+    if(auto) {
       stopSlideShow();
     } else {
       playButton.innerText = 'Stop slideshow'
-      interval = setInterval(() => {
-        if(index < amountOfPhotos - 1 && direction === 'next') index++;
-        if(index > 0 && direction === 'prev') index--;
-        if(index === amountOfPhotos - 1) {
-          direction = 'prev';
-        }
-        if(index === 0) {
-          direction = 'next';
-        }
-        photos.style.transform = `translate(${-index * 316}px, 0)`;
-      }, 1000);
+      auto = true;
+      autoSlideShow();
     }
   });
 
   function stopSlideShow() {
-    clearInterval(interval);
-    interval = '';
+    auto = false;
     playButton.innerText = 'Play slideshow'
+  }
+
+  function autoSlideShow() {
+    if(!auto) return;
+    if(index < amountOfPhotos - 1 && direction === 'next') index++;
+    if(index > 0 && direction === 'prev') index--;
+    if(index === amountOfPhotos - 1) {
+      direction = 'prev';
+    }
+    if(index === 0) {
+      direction = 'next';
+    }
+    photos.style.transform = `translate(${-index * 316}px, 0)`;
+    setTimeout(autoSlideShow, 2000);
   }
 }
