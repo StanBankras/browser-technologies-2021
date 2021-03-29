@@ -1,6 +1,14 @@
 const carousel = document.getElementById('carousel');
 const container = document.querySelector('.container');
 const photos = document.querySelector('.photos');
+const nextButton = document.getElementById('next');
+const prevButton = document.getElementById('prev');
+const playButton = document.getElementById('play');
+const containerWidth = container.getBoundingClientRect().width;
+const amountOfPhotos = carousel.dataset.photos;
+let index = 0;
+let direction = 'next';
+let auto = false;
 
 // Add classes and HTML that is needed when Javascript works
 photos.classList.add('js');
@@ -11,15 +19,6 @@ carousel.insertAdjacentHTML('beforeEnd', `
     <button id="next">Next</button>
   </div>
 `);
-
-const nextButton = document.getElementById('next');
-const prevButton = document.getElementById('prev');
-const playButton = document.getElementById('play');
-const containerWidth = container.getBoundingClientRect().width;
-const amountOfPhotos = carousel.dataset.photos;
-let index = 0;
-let direction = 'next';
-let auto = false;
 
 
 nextButton.addEventListener('click', () => {
