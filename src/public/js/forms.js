@@ -90,21 +90,21 @@ async function changeImageOrder(event) {
     method: 'POST'
   });
   if(response.status === 200) {
-    const element = event.path[1].cloneNode(true);
-    const index = getChildNodeIndex(event.path[1]);
+    const element = event.target.parentNode.cloneNode(true);
+    const index = getChildNodeIndex(event.target.parentNode);
     const container = document.querySelector('.images');
     getAndHandleForms(element);
 
     if(event.target.action.includes('up')) {
       if(index === 0) return;
-      container.insertBefore(element, event.path[1].previousSibling.previousSibling);
+      container.insertBefore(element, event.target.parentNode.previousSibling.previousSibling);
     }
     if(event.target.action.includes('down')) {
-      if(index === event.path[2].children.length - 1) return;
-      container.insertBefore(element, event.path[1].nextSibling.nextSibling.nextSibling);
+      if(index === event.target.parentNode.parentNode.children.length - 1) return;
+      container.insertBefore(element, event.target.parentNode.nextSibling.nextSibling.nextSibling);
     }
 
-    event.path[1].remove();
+    event.target.parentNode.remove();
   }
 }
 
