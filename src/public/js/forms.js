@@ -68,9 +68,7 @@ if(uploadForm) {
         form.addEventListener('submit', e => deleteImage(e));
         sendNotification('success', 'Image uploaded.');
       }
-    } catch(e) {
-      sendNotification('error', 'Image upload failed.');
-    }
+    } catch(e) {}
   });
 }
 
