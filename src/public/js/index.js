@@ -11,7 +11,7 @@ function sendNotification(type, message) {
 
   body.appendChild(notification);
 
-  setTimeout(() => notification.remove(), 3000);
+  setTimeout(function() { notification.remove() }, 3000);
 }
 
 function getChildNodeIndex(el) {

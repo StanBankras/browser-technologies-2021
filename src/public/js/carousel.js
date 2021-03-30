@@ -5,13 +5,7 @@
   
   // Add classes and HTML that is needed when Javascript works
   photos.classList.add('js');
-  carousel.insertAdjacentHTML('beforeEnd', `
-    <div class="controls">
-      <button id="prev">Previous</button>
-      <button id="play">Play slideshow</button>
-      <button id="next">Next</button>
-    </div>
-  `);
+  carousel.insertAdjacentHTML('beforeEnd', '<div class="controls"><button id="prev">Previous</button><button id="play">Play slideshow</button><button id="next">Next</button></div>');
   
   const nextButton = document.getElementById('next');
   const prevButton = document.getElementById('prev');
@@ -23,21 +17,21 @@
   let auto = false;
   
   
-  nextButton.addEventListener('click', () => {
+  nextButton.addEventListener('click', function() {
     if(index < amountOfPhotos - 1) index++;
     auto = false;
     playButton.innerText = 'Play slideshow'
-    photos.style.transform = `translate(${-index * 316}px, 0)`;
+    photos.style.transform = 'translate(' + -index * 316 + 'px, 0)';
   });
   
-  prevButton.addEventListener('click', () => {
+  prevButton.addEventListener('click', function() {
     if(index > 0) index--;
     auto = false;
     playButton.innerText = 'Play slideshow'
-    photos.style.transform = `translate(${-index * 316}px, 0)`;
+    photos.style.transform = 'translate(' + -index * 316 + 'px, 0)';
   });
   
-  playButton.addEventListener('click', () => {
+  playButton.addEventListener('click', function() {
     if(auto) {
       auto = false;
       playButton.innerText = 'Play slideshow'
@@ -58,7 +52,7 @@
     if(index === 0) {
       direction = 'next';
     }
-    photos.style.transform = `translate(${-index * 316}px, 0)`;
+    photos.style.transform = 'translate(' + -index * 316 + 'px, 0)';
     setTimeout(autoSlideShow, 2000);
   } 
 })();

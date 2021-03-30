@@ -1,6 +1,12 @@
 const uploadForm = document.querySelector('#image-upload');
 const deleteForms = document.querySelectorAll('.delete-image');
-const changeOrderForms = [...document.querySelectorAll('form.move-up'), ...document.querySelectorAll('form.move-down')];
+const changeOrderForms = function() {
+  const array = [];
+  document.querySelectorAll('form.move-up').forEach(function(form) { array.push(form) });
+  document.querySelectorAll('form.move-down').forEach(function(form) { array.push(form) });
+  
+  return array;
+}
 const orderPage = document.querySelector('.order .images');
 
 // If on order photo page, add missing buttons so ordering can be handled by JS
@@ -31,11 +37,11 @@ if(orderPage) {
 }
 
 if(changeOrderForms.length > 0) {
-  changeOrderForms.forEach(function(form) { form.addEventListener('submit', e => changeImageOrder(e)) });
+  changeOrderForms.forEach(function(form) { form.addEventListener('submit', function(e) { changeImageOrder(e) }) });
 }
 
 if(deleteForms.length > 0) {
-  deleteForms.forEach(function(form) { form.addEventListener('submit', e => deleteImage(e)) });
+  deleteForms.forEach(function(form) { form.addEventListener('submit', function(e) { deleteImage(e) }) });
 }
 
 if(uploadForm) {
@@ -72,40 +78,42 @@ if(uploadForm) {
   });
 }
 
-async function deleteImage(event) {
+function deleteImage(event) {
   event.preventDefault();
   const url = event.target.action;
-  const response = await fetch(event.target.action, {
+  fetch(event.target.action, {
     method: 'POST'
+  }).then(function(response) {
+    if(response.status === 200) {
+      event.target.parentElement.remove();
+    }
   });
-  if(response.status === 200) {
-    event.target.parentElement.remove();
-  }
 }
 
-async function changeImageOrder(event) {
+function changeImageOrder(event) {
   event.preventDefault();
   const url = event.target.action;
-  const response = await fetch(event.target.action, {
+  fetch(event.target.action, {
     method: 'POST'
+  }).then(function(response) {
+    if(response.status === 200) {
+      const element = event.target.parentNode.cloneNode(true);
+      const index = getChildNodeIndex(event.target.parentNode);
+      const container = document.querySelector('.images');
+      getAndHandleForms(element);
+  
+      if(event.target.action.includes('up')) {
+        if(index === 0) return;
+        container.insertBefore(element, event.target.parentNode.previousSibling.previousSibling);
+      }
+      if(event.target.action.includes('down')) {
+        if(index === event.target.parentNode.parentNode.children.length - 1) return;
+        container.insertBefore(element, event.target.parentNode.nextSibling.nextSibling.nextSibling);
+      }
+  
+      event.target.parentNode.remove();
+    }
   });
-  if(response.status === 200) {
-    const element = event.target.parentNode.cloneNode(true);
-    const index = getChildNodeIndex(event.target.parentNode);
-    const container = document.querySelector('.images');
-    getAndHandleForms(element);
-
-    if(event.target.action.includes('up')) {
-      if(index === 0) return;
-      container.insertBefore(element, event.target.parentNode.previousSibling.previousSibling);
-    }
-    if(event.target.action.includes('down')) {
-      if(index === event.target.parentNode.parentNode.children.length - 1) return;
-      container.insertBefore(element, event.target.parentNode.nextSibling.nextSibling.nextSibling);
-    }
-
-    event.target.parentNode.remove();
-  }
 }
 
 function getAndHandleForms(el) {
@@ -113,5 +121,5 @@ function getAndHandleForms(el) {
   for(child of el.childNodes) {
     if(child.nodeName === 'FORM') forms.push(child);
   }
-  forms.forEach(form => form.addEventListener('submit', e => changeImageOrder(e)));
+  forms.forEach(function(form) { form.addEventListener('submit', function(e) { changeImageOrder(e) }) });
 } 
