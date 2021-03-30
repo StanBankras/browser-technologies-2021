@@ -31,3 +31,12 @@ function addToArray(items) {
     
     return array;
 }
+
+function promisesSupported() {
+  try {
+    const promise = new Promise(function (x, y) {});
+    return true;
+  } catch (e) {
+    return false;
+  }
+}

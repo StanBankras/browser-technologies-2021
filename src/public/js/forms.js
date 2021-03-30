@@ -30,15 +30,15 @@ if(orderPage) {
   }
 }
 
-if(changeOrderForms.length > 0) {
+if(changeOrderForms.length > 0 && promisesSupported()) {
   changeOrderForms.forEach(function(form) { form.addEventListener('submit', function(e) { changeImageOrder(e) }) });
 }
 
-if(deleteForms.length > 0) {
+if(deleteForms.length > 0 && promisesSupported()) {
   deleteForms.forEach(function(form) { form.addEventListener('submit', function(e) { deleteImage(e) }) });
 }
 
-if(uploadForm) {
+if(uploadForm && promisesSupported()) {
   uploadForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const url = e.target.action;

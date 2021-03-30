@@ -2,7 +2,7 @@ const draggables = document.querySelectorAll('.draggable');
 const containers = document.querySelectorAll('.images');
 let afterElement;
 
-if(('draggable' in document.createElement('div'))) {
+if(('draggable' in document.createElement('div')) && promisesSupported()) {
   if(draggables.length > 0) {
     document.querySelectorAll('.visible').forEach(function(form) { form.classList.remove('visible') });
   }
