@@ -1,6 +1,8 @@
 # Online Photo Album
 *Browser Technologies @cmda-minor-web 20-21*
 
+![copy detect](https://github.com/StanBankras/browser-technologies-2021/blob/master/img/preview.png?raw=true)
+
 ## [Live demo](https://pe-photo-album.herokuapp.com/)
 
 ## Table of contents
