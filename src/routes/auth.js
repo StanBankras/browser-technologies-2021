@@ -24,7 +24,7 @@ router.post('/create-user', async (req, res) => {
   const user = new User();
   await user.save();
 
-  res.render('auth/id', { userId: user._id, pageTitle: 'Title' })
+  res.render('auth/id', { userId: user._id, pageTitle: 'Your ID' })
 });
 
 export default router;

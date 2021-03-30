@@ -64,6 +64,11 @@ img {
   overflow: hidden;
 }
 
+span.copy {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 h1 {
   margin-bottom: 1.2em;
   color: #025a4a;

@@ -201,6 +201,31 @@ function promisesSupported() {
 if(promisesSupported()) {
 ```
 
+#### Check if copy is possible
+```js
+if ('clipboard' in navigator) {
+  const idText = document.querySelector('h1 span');
+  const id = idText.innerText;
+  const el = document.createElement('textarea');
+  const body = document.querySelector('body');
+
+  idText.innerText = id + ' (click to copy)';
+  idText.classList.add('copy');
+  idText.addEventListener('click', function() {
+    el.value = id;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('Copied your ID to your clipboard!');
+  });
+}
+```
+
+Only when clipboard is available, I will show the user that they can click to copy their ID. I don't want users to see a functionality, while when they go for the interaction, nothing might happen. This feature detect prevents that from happening.
+
+![copy detect](https://github.com/StanBankras/browser-technologies-2021/blob/master/img/accessible/copy-detect.png?raw=true)
+
 ### CSS
 
 #### Feature detection
