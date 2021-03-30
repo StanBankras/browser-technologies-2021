@@ -22,3 +22,12 @@ function getChildNodeIndex(el) {
 
   return position;
 }
+
+function addToArray(items) {
+    const array = [];
+    items.forEach(function(item) {
+      item.forEach(function(subitem) { array.push(subitem) });
+    });
+    
+    return array;
+}

@@ -1,12 +1,6 @@
 const uploadForm = document.querySelector('#image-upload');
 const deleteForms = document.querySelectorAll('.delete-image');
-const changeOrderForms = function() {
-  const array = [];
-  document.querySelectorAll('form.move-up').forEach(function(form) { array.push(form) });
-  document.querySelectorAll('form.move-down').forEach(function(form) { array.push(form) });
-  
-  return array;
-}
+const changeOrderForms = addToArray([document.querySelectorAll('form.move-up'), document.querySelectorAll('form.move-down')]);
 const orderPage = document.querySelector('.order .images');
 
 // If on order photo page, add missing buttons so ordering can be handled by JS
