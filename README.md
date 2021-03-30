@@ -160,6 +160,32 @@ The goal of this project is to build a fully progressive enhanced website that w
 ## Test results
 [Find out about my test results in the wiki of this repository](https://github.com/StanBankras/browser-technologies-2021/wiki/Testing-my-app)
 
+## Choices of code written
+I want to be able to support as many browsers as possible, while still writing relatively modern code. At first, I wrote most of my code in ES6, as I am most used to that. 
+
+### ES6 specific features
+After looking at ES6 features that I use, like `spread operators: [...array, ...array]` on [caniuse](https://caniuse.com/), I started to rewrite my code. The spread operator for example is not supported on Internet Explorer at all. I replaced my spread operator usage with this function I made:
+```js
+function addToArray(items) {
+    const array = [];
+    items.forEach(function(item) {
+      item.forEach(function(subitem) { array.push(subitem) });
+    });
+    
+    return array;
+}
+```
+It gives me the same result, and I can support more browsers this way.
+
+### Arrow functions
+I'm a big fan of using arrow functions, because it means writing less and more clean code. Sadly, arrow functions are also not supported by IE, so I rewrote them to normal `function()`.
+
+### Cutting the mustard
+At some point, I don't want to endlessly refactor my code to support the most ancient browsers. My 'javascriptless' experience is good, everything works without it. That's why I chose to for instance keep my `forEach` in. It might not be supported in old IE, Chrome or Firefox browsers, but they can still use my app. I used a feature detection in Javascript to make this happen:
+```js
+// to add
+```
+
 ## TODO from 24-03
 - [x] Add metadata to photos
 - [x] Edit photo album
