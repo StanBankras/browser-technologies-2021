@@ -22,9 +22,9 @@ if(orderPage) {
       }
 
       clone.action = clone.action.replace(old, curr);
-      clone.classList.remove(`move-${old}`);
-      clone.classList.add(`move-${curr}`);
-      button.innerText = `Move ${curr}`;
+      clone.classList.remove('move-' + old);
+      clone.classList.add('move-' + curr);
+      button.innerText = 'Move ' + curr;
       child.appendChild(clone);
     }
   }
@@ -52,19 +52,12 @@ if(uploadForm && promisesSupported()) {
       } else {
         response.json().then(function(data) {
           const images = document.querySelector('.images');
-          images.insertAdjacentHTML('beforeEnd', `
-            <div>
-              <img src="data:image/jpeg;base64,${data.photo.base64}" alt="${data.photo.alt}">
-              <form class="${data.photo.id}" action="/albums/${data.albumId}/${data.photo.id}/delete?userId=${data.userId}" method="post">
-                <button type="submit">Delete</button>
-              </form>
-            </div>
-          `);
+          images.insertAdjacentHTML('beforeEnd', '<div><img src="data:image/jpeg;base64,' + data.photo.base64 + '" alt="' + data.photo.alt + '"><form class="' + data.photo.id + '" action="/albums/' + data.albumId + '/' + data.photo.id + '/delete?userId=' + data.userId + '" method="post"><button type="submit">Delete</button></form></div>');
       
           uploadForm.reset();
       
           const form = document.querySelector(`.${data.photo.id}`);
-          form.addEventListener('submit', e => deleteImage(e));
+          form.addEventListener('submit', function(e) { deleteImage(e) });
           sendNotification('success', 'Image uploaded.');
         });
       }
