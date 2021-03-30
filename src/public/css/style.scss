@@ -5,21 +5,16 @@
 }
 
 :root {
-  --primary: #09806a;
-  --primary-darken: #025a4a;
-  --primary-lighten: #1fb196;
-  --secondary: #0c5c44;
-  --dark: #e7e7e7;
   --background: #ffffff;
   --error: red;
 }
 
 body {
-  background-color: var(--dark);
+  background-color: #e7e7e7;
 }
 
 header {
-  background-color: var(--secondary);
+  background-color: #0c5c44;
   color: white;
   padding: 2rem 0;
   nav {
@@ -39,13 +34,13 @@ header {
 
 main {
   min-height: 70vh;
-  background-color: var(--background);
+  background-color: #ffffff;
   padding: 2rem 0;
 }
 
 footer {
   padding: 2rem 0;
-  background-color: var(--dark);
+  background-color: #e7e7e7;
 }
 
 img {
@@ -67,7 +62,7 @@ img {
 
 h1 {
   margin-bottom: 1.2em;
-  color: var(--primary-darken);
+  color: #025a4a;
   font-size: 1.8rem;
 }
 
@@ -88,7 +83,7 @@ button, .button {
   text-decoration: none;
   padding: 0.5rem 1rem;
   border: 0;
-  background-color: var(--primary);
+  background-color: #09806a;
   color: white;
   font-weight: bold;
   margin: 1rem 0;
@@ -97,11 +92,11 @@ button, .button {
   font-family: serif;
   font-size: 15px;
   &:hover {
-    background-color: var(--primary-lighten);
+    background-color: #1fb196;
   }
   &.error {
     background-color: transparent;
-    border: 3px solid var(--error);
+    border: 3px solid red;
     &:hover {
       background-color: red;
       color: white;
@@ -111,7 +106,7 @@ button, .button {
 
 input, textarea {
   padding: 0.5rem;
-  border: 1px solid var(--dark);
+  border: 1px solid #e7e7e7;
   margin: 0.5rem 0 1.5rem 0;
 }
 
@@ -167,7 +162,7 @@ textarea {
 }
 
 .error {
-  color: var(--error);
+  color: red;
   margin: 0.5rem 0 2rem 0;
 }
 
@@ -336,26 +331,26 @@ textarea {
           align-items: center;
           font-weight: bold;
           margin-bottom: 1rem;
-          border: 4px solid var(--primary);
+          border: 4px solid #09806a;
           transition: .4s;
         }
         &.active, &:hover {
           .number {
-            background-color: var(--primary);
+            background-color: #09806a;
             color: white;
           }
         }
         &.finished {
           .number {
-            background-color: var(--primary-darken);
-            border-color: var(--primary-darken);
+            background-color: #025a4a;
+            border-color: #025a4a;
             color: white;
           }
         }
         &.disabled {
           .number {
-            background-color: var(--dark);
-            border-color: var(--dark);
+            background-color: #e7e7e7;
+            border-color: #e7e7e7;
             color: rgb(44, 44, 44);
           }
         }
@@ -438,7 +433,7 @@ textarea {
   bottom: 1rem;
   padding: 0.5rem 2rem;
   border-radius: 30px;
-  background-color: var(--primary);
+  background-color: #09806a;
   color: white;
   left: 50%;
   transform: translateX(-50%);

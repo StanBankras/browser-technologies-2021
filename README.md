@@ -181,10 +181,49 @@ It gives me the same result, and I can support more browsers this way.
 I'm a big fan of using arrow functions, because it means writing less and more clean code. Sadly, arrow functions are also not supported by IE, so I rewrote them to normal `function()`.
 
 ### Cutting the mustard
-At some point, I don't want to endlessly refactor my code to support the most ancient browsers. My 'javascriptless' experience is good, everything works without it. That's why I chose to for instance keep my `forEach` in. It might not be supported in old IE, Chrome or Firefox browsers, but they can still use my app. I used a feature detection in Javascript to make this happen:
+At some point, I don't want to endlessly refactor my code to support the most ancient browsers. My 'javascriptless' experience is good, everything works without it. That's why I chose to for instance keep my `forEach` in. It might not be supported in old IE, Chrome or Firefox browsers, but they can still use my app. I used a feature detection in Javascript to make this happen.
+
+#### Check if browser supports promises
+If not, disable all javascript code based on this boolean that uses them (fetch).
 ```js
-// to add
+function promisesSupported() {
+  try {
+    const promise = new Promise(function (x, y) {});
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+// https://stackoverflow.com/a/22517230
+
+// in code:
+
+if(promisesSupported()) {
 ```
+
+### CSS
+
+#### Feature detection
+In my CSS, I used a mediaquery to detect a touch/inaccurate device:
+```scss
+@media (pointer:coarse) {
+  .image {
+    form {
+      opacity: 1;
+    }
+  }
+  #image-order {
+    opacity: 1;
+    max-height: unset;
+    max-width: unset;
+    padding: 0.5rem 1rem;
+  }
+}
+// https://medium.com/@ferie/detect-a-touch-device-with-only-css-9f8e30fa1134
+```
+
+#### Remove variables
+At the start, I used `:root` variables in my CSS, however, I found out that they are not supported in latest versions of IE. As I don't want my users to see no colors, I removed my variables.
 
 ## TODO from 24-03
 - [x] Add metadata to photos
@@ -200,3 +239,5 @@ At some point, I don't want to endlessly refactor my code to support the most an
 
 ## Acknowledgements
 * [Drag & Drop API tutorial](https://www.youtube.com/watch?v=jfYWwQrtzzY)
+* [Promise feature detection](https://stackoverflow.com/a/22517230)
+* [Detect touch or inaccurate devices](https://medium.com/@ferie/detect-a-touch-device-with-only-css-9f8e30fa1134)
