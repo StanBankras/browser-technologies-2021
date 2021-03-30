@@ -1,6 +1,10 @@
 <%- include('../partials/head.ejs'); %>
 <%- include('../partials/header.ejs'); %>
 
-<p>Your id is <%= userId %></p>
+<section class="id">
+  <h1>Your id is <span><%= userId %></span></h1>
+  <p>If you want to be able to access your created photo albums later on, be sure to keep this in a safe place.</p>
+  <a href="/albums?userId=<%= userId %>" class="button">Go to albums</a>
+</section>
 
 <%- include('../partials/footer.ejs'); %>

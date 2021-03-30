@@ -120,7 +120,9 @@ Each album can be viewed in a carroussel
 * Javascript can allow for nice carroussel experience
 
 ## Web API research
-I am most likely going to research the [MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API) for this project, since I might be able to offer users the feature to capture an image and directly put it into their album.
+At first, I was most likely going to research the [MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API) for this project, since I might be able to offer users the feature to capture an image and directly put it into their album.
+
+However, I found out that mobile & tablet users already get the option to capture images immediately when they press to upload a file to a file input (that supports images). I didn't see this API as an enhancement to my app anymore
 
 ## Progressive enhancement idea
 The goal of this project is to build a fully progressive enhanced website that works on many different browsers, with / without javascript and with / without CSS. Here's how I technically plan to achieve these so-called layers:
@@ -152,7 +154,11 @@ The goal of this project is to build a fully progressive enhanced website that w
 * Mobile: iOS & Android (safari & chrome)
 
 **Web technology I will research**
-* [MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API)
+* ~~[MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API)~~
+* [Drag & drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
+
+## Test results
+[Find out about my test results in the wiki of this repository](https://github.com/StanBankras/browser-technologies-2021/wiki/Testing-my-app)
 
 ## TODO from 24-03
 - [x] Add metadata to photos
@@ -161,10 +167,10 @@ The goal of this project is to build a fully progressive enhanced website that w
   - [x] Upload new photos
   - [x] Delete photo
 - [x] Delete album
-- [ ] Edit photo metadata
-- [ ] Preview album in carroussel
-- [ ] Preview album in slideshow
-- [ ] Test browsers
+- [x] Edit photo metadata
+- [x] Preview album in carroussel
+- [x] Preview album in slideshow
+- [x] Test browsers
 
 ## Acknowledgements
 * [Drag & Drop API tutorial](https://www.youtube.com/watch?v=jfYWwQrtzzY)

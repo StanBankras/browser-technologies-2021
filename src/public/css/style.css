@@ -162,6 +162,22 @@ textarea {
   }
 }
 
+.auth form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 300px;
+  margin-bottom: 2rem;
+}
+
+.id h1 span {
+  color: black;
+}
+
 .error {
   color: var(--error);
   margin: 0.5rem 0 2rem 0;

@@ -3,7 +3,7 @@ const containers = document.querySelectorAll('.images');
 
 if(!('draggable' in document.createElement('div'))) {
   if(draggables.length > 0) {
-    document.querySelectorAll('.draggable form').forEach(form => form.classList.add('visible'));
+    document.querySelectorAll('.image form').forEach(form => form.classList.add('visible'));
   }
 }
 

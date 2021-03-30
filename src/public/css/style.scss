@@ -149,6 +149,23 @@ textarea {
   }
 }
 
+.auth {
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin-bottom: 2rem;
+  }
+}
+
+.id {
+  h1 {
+    span {
+      color: black;
+    }
+  }
+}
+
 .error {
   color: var(--error);
   margin: 0.5rem 0 2rem 0;

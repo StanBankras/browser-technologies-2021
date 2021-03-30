@@ -1,14 +1,16 @@
 <%- include('../partials/head.ejs'); %>
 <%- include('../partials/header.ejs'); %>
 
-<form action="/login" method="post">
-  <label for="id">Log in with your ID</label>
-  <input type="text" name="id" id="id">
-  <button type="submit">Login with ID</button>
-</form>
-<form action="/create-user" method="post">
-  <label>No ID yet?</label>
-  <button type="submit">Get ID</button>
-</form>
+<section class="auth">
+  <form action="/login" method="post">
+    <label for="id">Enter your ID to login</label>
+    <input type="text" name="id" id="id">
+    <button type="submit">Login with ID</button>
+  </form>
+  <form action="/create-user" method="post">
+    <label>Don't have an ID yet?</label>
+    <button type="submit">Get ID</button>
+  </form>
+</section>
 
 <%- include('../partials/footer.ejs'); %>
