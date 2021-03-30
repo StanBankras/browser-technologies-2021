@@ -23,7 +23,7 @@ draggables.forEach(function(draggable) {
     if(!afterElement) {
       newIndex = document.querySelector('.images').childElementCount;
     } else {
-      newIndex = Math.max(getChildNodeIndex(afterElement.parentNode) - 1, 0);
+      newIndex = Math.max(getChildNodeIndex(afterElement.parentNode), 0);
       afterElement = undefined;
     }
     const url = '/albums/' + albumId + '/' + imgId + '/order/' + newIndex + '?userId=' + userId;
@@ -36,7 +36,7 @@ draggables.forEach(function(draggable) {
 containers.forEach(function(container) {
   container.addEventListener('dragover', function(e) {
     e.preventDefault();
-    const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
+    afterElement = getDragAfterElement(container, e.clientX, e.clientY);
     const draggable = document.querySelector('.dragging');
     
     if (afterElement == null) {
@@ -59,8 +59,5 @@ function getDragAfterElement(container, x, y) {
       return closest;
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element;
-  if(el) {
-    afterElement = el;
-  }
   return el;
 }
