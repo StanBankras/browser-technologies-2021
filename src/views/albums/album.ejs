@@ -11,7 +11,7 @@
   <div class="controls">
     <a href="/albums/<%= album.id %>/details?userId=<%= userId %>" class="button">Edit details</a>
     <a href="/albums/<%= album.id %>/upload?userId=<%= userId %>" class="button">Add or remove images</a>
-    <a id="image-order" href="/albums/<%= album.id %>/sort?userId=<%= userId %>" class="button">Change image order</a>
+    <a id="image-order" href="/albums/<%= album.id %>/sort?userId=<%= userId %>" class="button visible">Change image order</a>
   </div>
   <section class="images" data-id="<%= album.id %>" data-userid="<%= userId %>">
     <% album.photos.sort((a, b) => a.order - b.order).forEach(photo => { %>

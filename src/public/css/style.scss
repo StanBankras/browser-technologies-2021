@@ -476,7 +476,6 @@ textarea {
   max-width: 0;
   max-height: 0;
   overflow: hidden;
-  padding: 0;
 }
 
 @media (pointer:coarse) {
@@ -542,4 +541,11 @@ textarea {
     display: flex;
     justify-content: space-between;
   }
+}
+
+.visible {
+  opacity: 1 !important;
+  max-width: unset !important;
+  overflow: unset !important;
+  max-height: unset !important;
 }

@@ -31,44 +31,44 @@ if(orderPage) {
 }
 
 if(changeOrderForms.length > 0) {
-  changeOrderForms.forEach(form => form.addEventListener('submit', e => changeImageOrder(e)));
+  changeOrderForms.forEach(function(form) { form.addEventListener('submit', e => changeImageOrder(e)) });
 }
 
 if(deleteForms.length > 0) {
-  deleteForms.forEach(form => form.addEventListener('submit', e => deleteImage(e)));
+  deleteForms.forEach(function(form) { form.addEventListener('submit', e => deleteImage(e)) });
 }
 
 if(uploadForm) {
-  uploadForm.addEventListener('submit', async e => {
-    try {
-      e.preventDefault();
-      const url = e.target.action;
-      const response = await fetch(e.target.action + '&type=json', {
-        method: 'POST',
-        body: new FormData(uploadForm)
-      });
-  
+  uploadForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const url = e.target.action;
+
+    fetch(e.target.action + '&type=json', {
+      method: 'POST',
+      body: new FormData(uploadForm)
+    }).then(function(response) {
       if(response.status !== 200) {
         sendNotification('error', 'Image upload failed.');
       } else {
-        const data = await response.json();
-        const images = document.querySelector('.images');
-        images.insertAdjacentHTML('beforeEnd', `
-          <div>
-            <img src="data:image/jpeg;base64,${data.photo.base64}" alt="${data.photo.alt}">
-            <form class="${data.photo.id}" action="/albums/${data.albumId}/${data.photo.id}/delete?userId=${data.userId}" method="post">
-              <button type="submit">Delete</button>
-            </form>
-          </div>
-        `);
-    
-        uploadForm.reset();
-    
-        const form = document.querySelector(`.${data.photo.id}`);
-        form.addEventListener('submit', e => deleteImage(e));
-        sendNotification('success', 'Image uploaded.');
+        response.json().then(function(data) {
+          const images = document.querySelector('.images');
+          images.insertAdjacentHTML('beforeEnd', `
+            <div>
+              <img src="data:image/jpeg;base64,${data.photo.base64}" alt="${data.photo.alt}">
+              <form class="${data.photo.id}" action="/albums/${data.albumId}/${data.photo.id}/delete?userId=${data.userId}" method="post">
+                <button type="submit">Delete</button>
+              </form>
+            </div>
+          `);
+      
+          uploadForm.reset();
+      
+          const form = document.querySelector(`.${data.photo.id}`);
+          form.addEventListener('submit', e => deleteImage(e));
+          sendNotification('success', 'Image uploaded.');
+        });
       }
-    } catch(e) {}
+    });
   });
 }
 

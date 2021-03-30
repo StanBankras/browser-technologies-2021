@@ -1,9 +1,10 @@
 const draggables = document.querySelectorAll('.draggable');
 const containers = document.querySelectorAll('.images');
+let afterElement;
 
-if(!('draggable' in document.createElement('div'))) {
+if(('draggable' in document.createElement('div'))) {
   if(draggables.length > 0) {
-    document.querySelectorAll('.image form').forEach(form => form.classList.add('visible'));
+    document.querySelectorAll('.visible').forEach(form => form.classList.remove('visible'));
   }
 }
 
@@ -14,8 +15,6 @@ draggables.forEach(draggable => {
 
   draggable.addEventListener('dragend', e => {
     draggable.classList.remove('dragging');
-
-    const afterElement = getDragAfterElement(document.querySelector('.images'), e.clientX, e.clientY)
     const imgId = e.target.dataset.id;
     const albumId = document.querySelector('.images').dataset.id;
     const userId = document.querySelector('.images').dataset.userid;
@@ -24,7 +23,8 @@ draggables.forEach(draggable => {
     if(!afterElement) {
       newIndex = document.querySelector('.images').childElementCount;
     } else {
-      newIndex = getChildNodeIndex(afterElement);
+      newIndex = Math.max(getChildNodeIndex(afterElement.parentNode) - 1, 0);
+      afterElement = undefined;
     }
     const url = `/albums/${albumId}/${imgId}/order/${newIndex}?userId=${userId}`;
     fetch(url, {
@@ -51,7 +51,7 @@ containers.forEach(container => {
 function getDragAfterElement(container, x, y) {
   const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
 
-  const afterEl = draggableElements.reduce((closest, child, i) => {
+  const el = draggableElements.reduce((closest, child, i) => {
     const box = child.getBoundingClientRect();
     const offset = x - box.left - box.width / 2;
     if (offset < 0 && offset > closest.offset && y > box.top && y < box.bottom) {
@@ -60,6 +60,8 @@ function getDragAfterElement(container, x, y) {
       return closest;
     }
   }, { offset: Number.NEGATIVE_INFINITY }).element;
-
-  return afterEl;
+  if(el) {
+    afterElement = el;
+  }
+  return el;
 }
