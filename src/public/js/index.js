@@ -1,3 +1,4 @@
+// Sends user a bit of feedback once something is saved to the database
 function sendNotification(type, message) {
   const body = document.querySelector('body');
   const notification = document.createElement('div');
@@ -14,6 +15,7 @@ function sendNotification(type, message) {
   setTimeout(function() { notification.remove() }, 3000);
 }
 
+// Get the index of the element when looking at its parent
 function getChildNodeIndex(el) {
   let position = 0;
   while ((el = el.previousSibling) != null) {
@@ -23,6 +25,7 @@ function getChildNodeIndex(el) {
   return position;
 }
 
+// Remove the need for using ES6 spread operator
 function addToArray(items) {
     const array = [];
     items.forEach(function(item) {
@@ -32,6 +35,7 @@ function addToArray(items) {
     return array;
 }
 
+// Feature detection: check if promises are supported
 function promisesSupported() {
   try {
     const promise = new Promise(function (x, y) {});

@@ -5,6 +5,7 @@
   
   // Add classes and HTML that is needed when Javascript works
   photos.classList.add('js');
+  // Add in the buttons dynamically if javascript is enabled
   carousel.insertAdjacentHTML('beforeEnd', '<div class="controls"><button id="prev">Previous</button><button id="play">Play slideshow</button><button id="next">Next</button></div>');
   
   const nextButton = document.getElementById('next');

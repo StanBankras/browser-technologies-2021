@@ -20,12 +20,14 @@ draggables.forEach(function(draggable) {
     const userId = document.querySelector('.images').dataset.userid;
     let newIndex;
 
+    // Decide where the element should be placed
     if(!afterElement) {
       newIndex = document.querySelector('.images').childElementCount;
     } else {
       newIndex = Math.max(getChildNodeIndex(afterElement.parentNode), 0);
       afterElement = undefined;
     }
+    // Make the call to the API so save the new order
     const url = '/albums/' + albumId + '/' + imgId + '/order/' + newIndex + '?userId=' + userId;
     fetch(url, {
       method: 'POST'
@@ -50,6 +52,7 @@ containers.forEach(function(container) {
 function getDragAfterElement(container, x, y) {
   const draggableElements = addToArray([container.querySelectorAll('.draggable:not(.dragging)')]);
 
+  // Get element closest to cursor
   const el = draggableElements.reduce(function(closest, child, i) {
     const box = child.getBoundingClientRect();
     const offset = x - box.left - box.width / 2;

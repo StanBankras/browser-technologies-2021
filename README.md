@@ -140,7 +140,8 @@ The goal of this project is to build a fully progressive enhanced website that w
 
 ### 3. Pleasurable
 * Upload & delete images without seeing page refreshes happen: it removes some distraction and it feels like things happen more instantly.
-* Allow users to directly capture an image from inside the browser, so they can for instance build a photo album while on vaction, or digitalize an old photo book/album.
+* ~~Allow users to directly capture an image from inside the browser, so they can for instance build a photo album while on vaction, or digitalize an old photo book/album.~~ - Removed after switching to Drag & Drop API
+* Drag and drop to order images instead of clicking buttons. Feels even more like the user is in control
 * Automatically play albums as a slideshow
 
 ## Core functionalities

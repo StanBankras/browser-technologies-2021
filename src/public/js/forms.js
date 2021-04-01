@@ -52,12 +52,14 @@ if(uploadForm && promisesSupported()) {
       } else {
         response.json().then(function(data) {
           const images = document.querySelector('.images');
+          // Client side render the response in
           images.insertAdjacentHTML('beforeEnd', '<div><img src="data:image/jpeg;base64,' + data.photo.base64 + '" alt="' + data.photo.alt + '"><form class="' + data.photo.id + '" action="/albums/' + data.albumId + '/' + data.photo.id + '/delete?userId=' + data.userId + '" method="post"><button type="submit">Delete</button></form></div>');
       
           uploadForm.reset();
       
           const form = document.querySelector(`.${data.photo.id}`);
           form.addEventListener('submit', function(e) { deleteImage(e) });
+          // Send notification as feedback
           sendNotification('success', 'Image uploaded.');
         });
       }
@@ -72,6 +74,7 @@ function deleteImage(event) {
     method: 'POST'
   }).then(function(response) {
     if(response.status === 200) {
+      // Remove image clientside if succeeded
       event.target.parentElement.remove();
     }
   });

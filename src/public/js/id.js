@@ -1,3 +1,4 @@
+// Only add 'click to copy' if javascript is available and supports clipboard
 if ('clipboard' in navigator) {
   const idText = document.querySelector('h1 span');
   const id = idText.innerText;
