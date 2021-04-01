@@ -35,7 +35,6 @@ draggables.forEach(function(draggable) {
 
 containers.forEach(function(container) {
   container.addEventListener('dragover', function(e) {
-    e.preventDefault();
     afterElement = getDragAfterElement(container, e.clientX, e.clientY);
     const draggable = document.querySelector('.dragging');
     
@@ -44,6 +43,7 @@ containers.forEach(function(container) {
     } else {
       container.insertBefore(draggable.parentNode, afterElement.parentNode);
     }
+    e.preventDefault();
   })
 })
 
