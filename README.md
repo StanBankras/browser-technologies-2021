@@ -12,6 +12,9 @@
 * Core functionalities
 * Browsers I will test in
 
+## Problem
+How do we offer a user with a poor device or browser a working photo album application, and a user with a high-end device an amazing experience within the same app?
+
 ## Wireframes + P/E
 ### Empty state
 <img src="https://github.com/StanBankras/browser-technologies-2021/blob/master/img/wireframes/empty-state.jpg?raw=true" alt="Empty state" height="500"/>
@@ -160,7 +163,7 @@ The goal of this project is to build a fully progressive enhanced website that w
 * ~~[MediaStream Image Capture API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Image_Capture_API)~~
 * [Drag & drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API)
 
-## Test results
+## Test results: how did I solve the problem?
 [Find out about my test results in the wiki of this repository](https://github.com/StanBankras/browser-technologies-2021/wiki/Testing-my-app)
 
 ## Choices of code written
